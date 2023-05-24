@@ -1,0 +1,68 @@
+import useLevels from "@/hooks/useLevels";
+import useSelectedLevel from "@/hooks/useSelectedLevel";
+import useSettingsModal from "@/hooks/useSettingsModal";
+import React from "react";
+
+const Header = () => {
+
+  const selectedLevel = useSelectedLevel();
+  const levels=useLevels();
+  const levelList=levels.levels;
+  const settingsModal= useSettingsModal();
+
+
+  return (
+    <div className="h-[75px] w-full bg-white flex px-10 items-center justify-between border-b-[1px] border-[#000000] border-opacity-25">
+      <div className="flex gap-3">
+        <div
+          className="w-[169px] h-[54px] flex justify-center gap-1 items-center bg-buttonGradient rounded-[100px]"
+          style={{ boxShadow: "3px 2px black" }}
+        >
+          <p className="text-lg font-extrabold">تم ها</p>
+          <img src="images/brush.svg" alt="brush" />
+        </div>
+        <div className="flex justify-center items-center gap-1">
+          <img src="images/stored.svg" alt="" />
+          <p>پیش نویس بازی در پروفایل شما ذخیره شد.</p>
+        </div>
+      </div>
+      <div className="flex gap-3">
+        <div className="w-[261px] h-[52px] flex justify-center items-center border-[1px] border-black rounded-[34px] ">
+          <p className="text-lg text-[#aaaaaa] ml-3">نام بازی :</p>
+          <p className="text-xl text-[#000000] font-extrabold ml-3">
+            پرتقال من کجاست؟
+          </p>
+        </div>
+        <div
+          className="w-[70px] h-[59px] flex items-center justify-center bg-[#6B00E2] rounded-[34px] border-[1px] border-black cursor-pointer"
+          style={{ boxShadow: "3px 2px black" }}
+          onClick={settingsModal.onOpen}
+        >
+          <img src="images/settingsIcon.svg" alt="settingsIcon" />
+        </div>
+      </div>
+
+     <div className="flex items-center gap-7">
+     <div className="flex items-center gap-2">
+        <img className={`${selectedLevel.selectedLevel!==levelList.length-1 && 'cursor-pointer'}`} src={`${selectedLevel.selectedLevel==levelList.length-1?"images/arrowDownBorderRoundDisable.svg":"images/arrowDownBorderRound.svg"}`}   alt="arrowdown" onClick={()=>{selectedLevel.selectedLevel!==levelList.length-1 && selectedLevel.onDown()}} />
+        <img className={`${selectedLevel.selectedLevel!==0 && 'cursor-pointer' }`} src={`${selectedLevel.selectedLevel==0?"images/arrowUpBorderRound.svg":"images/arrowUpBorderRoundEnable.svg"}`} alt="arrowup" onClick={()=>{selectedLevel.selectedLevel!==0 && selectedLevel.onUp()}} />
+        <p className="text-[#0c0c0c] text-[17px] font-semibold">
+          جابجایی مراحل
+        </p>
+      </div>
+      <div className="w-[1px] h-[32px] bg-[#000000] opacity-25 ml-3"></div>
+
+      <div
+        className="w-[222px] h-[53px] bg-buttonPurple rounded-[100px] border-[2px] border-[black] flex justify-center items-center "
+        style={{ boxShadow: "4px 4px #6B00E2" }}
+      >
+        <p className="text-white text-[16px] font-extrabold">
+          مشاهده پیش نمایش
+        </p>
+      </div>
+     </div>
+    </div>
+  );
+};
+
+export default Header;

@@ -8,9 +8,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'navbar': "url('../public/images/navbarbg.svg')",
+        'buttonPurple': "url('../public/images/buttonBgPurple.svg')",
+        'buttonGradient': "url('../public/images/gradientButtonBg.svg')",
+        'buttonGold': "url('../public/images/ButtonGoldBg.svg')",
+        'canvasBg': "url('../public/images/CanvasBg.svg')",
+        'levelCard': "url('../public/images/levelCardBg.svg')",
       },
     },
   },
