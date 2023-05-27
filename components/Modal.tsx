@@ -2,19 +2,17 @@ import React from 'react'
 
 interface ModalProps {
     isOpen?: boolean;
-    onClose: () => void;
-    onSubmit: () => void;
     body?: React.ReactElement;
 }
 
-const Modal:React.FC<ModalProps> = ({isOpen,onClose,onSubmit,body}) => {
+const Modal:React.FC<ModalProps> = ({isOpen,body}) => {
   if (!isOpen) {
     return null;
   }
   
   return (
     <div
-      className="
+      className={`
           justify-center 
           items-center 
           flex 
@@ -25,15 +23,17 @@ const Modal:React.FC<ModalProps> = ({isOpen,onClose,onSubmit,body}) => {
           z-50 
           outline-none 
           focus:outline-none
-          bg-neutral-700
           bg-opacity-60
-        "
+          bg-neutral-100
+          transition-all
+            duration-300
+            ${isOpen ? 'scale-100 opacity-100':' scale-0 opacity-0  bg-transparent -translate-x-[130px] -translate-y-[410px]'}
+        `}
         dir="rtl"
     >
-      <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
-        {/*content*/}
+      <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto ">
         <div
-          className="
+          className={`
             h-full
             lg:h-auto
             border-0 
@@ -47,7 +47,7 @@ const Modal:React.FC<ModalProps> = ({isOpen,onClose,onSubmit,body}) => {
             outline-none 
             focus:outline-none
             
-            "
+            `}
         > 
         {body}
         </div>

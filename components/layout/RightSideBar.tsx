@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RightSideBarSelect from "../RightSideBarSelect";
 import useSelectedLevel from "@/hooks/useSelectedLevel";
-import useLevels from "@/hooks/useLevels";
+import useLevels, { Level } from "@/hooks/useLevels";
 
 const RigtSideBar = () => {
-  const selectedLevel = useSelectedLevel();
-  const levels=useLevels();
-  const levelsList = levels.levels;
-  const currentLevel = levelsList[selectedLevel.selectedLevel];
-  const [selectedEffect, setSelectedEffect] = useState(0);
  
+  const levels = useLevels();
+  const levelsList = levels.levels;
+  const selectedLevelIndex = levelsList.findIndex((level)=>level.isSelected == true);
+  const currentLevel = levelsList[selectedLevelIndex];
+
+
+
+  const [selectedEffect, setSelectedEffect] = useState(0);
   const [modelBaziIsOpen, setModelBaziIsOpen] = useState(false);
   const [zamanBaziIsOpen, setZamanBaziIsOpen] = useState(false);
   const [emtiazBaziIsOpen, setEmtiazBaziIsOpen] = useState(false);
   const [sakhtiBaziIsOpen, setSakhtiBaziIsOpen] = useState(false);
+  
+  
   const effects = ["بدون افکت", "3 در 3", "6 در 6", "9 در 9"];
 
   const games = [
@@ -36,13 +41,26 @@ const RigtSideBar = () => {
     'سخت'
   ]
 
+
+  const selectHandle = (index:number)=>{
+    const newList = levelsList;
+    newList[selectedLevelIndex].isSelected = false;
+    newList[index].isSelected=true;
+    levels.onChangeLevel(newList);
+   }
+
+  const handleDelete=(level:Level)=>{
+    selectHandle(selectedLevelIndex-1);
+    levels.onDelete(level);
+}
+
   return (
-    <div className="col-span-2 flex flex-col  gap-5 items-center px-5 py-7">
-      <div className="levelsScroll flex flex-col gap-5 overflow-y-scroll h-[480px] pl-[10px]">
+    <div className="col-span-2 flex flex-col  gap-5 items-center px-2 py-7">
+      <div className="levelsScroll flex flex-col gap-5 overflow-y-scroll md:h-[405px]  h-[480px] pl-[10px]">
       <RightSideBarSelect
         titleIcon="images/gamepad.svg"
         title="مدل بازی"
-        selectedIcon="images/4gozine.svg"
+        selectedIcon={currentLevel.icon}
 
         isOpen={modelBaziIsOpen}
         handleOpen={()=>setModelBaziIsOpen(!modelBaziIsOpen)}
@@ -83,17 +101,17 @@ const RigtSideBar = () => {
         ))}
       </div>
       </div>
-      <div className="w-[289px] max-w-[289px] flex items-center justify-center gap-3  h-[53px] rounded-full bg-buttonGold top-2 " style={{ boxShadow: "3px 2px black" }}>
+      <div className=" md:w-[250px] md:h-[49px] w-[289px] max-w-[289px] flex items-center justify-center gap-3  h-[53px] rounded-full border-[1px] border-black bg-[#ffb72a] top-2 " style={{ boxShadow: "2px 3px black" }}>
             <div className="w-[36px] h-[36px] flex items-center justify-center rounded-full border-black border-[2px]" style={{ boxShadow: "3px 2px black" }}>
                 <img src="images/rahnamaIcon.svg" alt="rahnama" />
             </div>
                 <p className="text-white font-bold">افزودن راهنما به این مرحله</p>
       </div>
       <div className="flex items-center gap-2">
-        <div className="w-[140px] h-[52px] flex items-center justify-center rounded-[34px] bg-white border-black border-[1px]" style={{ boxShadow: "3px 2px black" }}>
+        <div className=" md:w-[110px] w-[140px] h-[52px] md:h-[48px] flex items-center justify-center rounded-[34px] bg-white border-black border-[1px]" style={{ boxShadow: "2px 3px black" }}>
             <p className="text-xl font-bold">کپی اسلاید</p>
         </div>
-        <div className="w-[140px] h-[52px] flex justify-center items-center rounded-[34px] bg-[#fd4b55] border-black border-[1px] cursor-pointer" style={{ boxShadow: "3px 2px black" }} onClick={()=>levels.onDelete(currentLevel)}>
+        <div className="md:w-[110px] w-[140px] h-[52px] md:h-[48px] flex justify-center items-center rounded-[34px] bg-[#fd4b55] border-black border-[1px] cursor-pointer" style={{ boxShadow: "2px 3px black" }} onClick={()=>handleDelete(currentLevel)}>
             <p className="text-white font-bold text-xl">حذف اسلاید</p>
         </div>
       </div>

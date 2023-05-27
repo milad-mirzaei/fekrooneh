@@ -10,8 +10,8 @@ interface SelectedLevelStore {
 const useSelectedLevel=create<SelectedLevelStore>((set)=>({
     selectedLevel : 0,
     onChange:(index)=>set({selectedLevel:index}),
-    onUp:()=>set((state)=>({selectedLevel:state.selectedLevel!-1})),
-    onDown:()=>set((state)=>({selectedLevel:state.selectedLevel!+1}))
+    onUp:()=>set((state)=>({selectedLevel:state.selectedLevel-1})),
+    onDown:()=>set((state)=>({selectedLevel:state.selectedLevel+1}))
 }))
 
 export default useSelectedLevel;

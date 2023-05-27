@@ -6,4 +6,4 @@ const LevelView = () => {
   )
 }
 
-export default LevelView
+export default LevelView;

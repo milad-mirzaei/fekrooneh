@@ -12,6 +12,7 @@ module.exports = {
         'buttonPurple': "url('../public/images/buttonBgPurple.svg')",
         'buttonGradient': "url('../public/images/gradientButtonBg.svg')",
         'buttonGold': "url('../public/images/ButtonGoldBg.svg')",
+        'buttonPremiume': "url('../public/images/premiumeButtonBg.svg')",
         'canvasBg': "url('../public/images/CanvasBg.svg')",
         'levelCard': "url('../public/images/levelCardBg.svg')",
       },

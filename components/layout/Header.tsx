@@ -5,11 +5,18 @@ import React from "react";
 
 const Header = () => {
 
-  const selectedLevel = useSelectedLevel();
+  // const selectedLevel = useSelectedLevel();
   const levels=useLevels();
   const levelList=levels.levels;
   const settingsModal= useSettingsModal();
+  const selectedLevelIndex = levelList.findIndex((level)=>level.isSelected == true);
 
+  const selectHandle = (index:number)=>{
+    const newList = levelList;
+    newList[selectedLevelIndex].isSelected = false;
+    newList[index].isSelected=true;
+    levels.onChangeLevel(newList);
+   }
 
   return (
     <div className="h-[75px] w-full bg-white flex px-10 items-center justify-between border-b-[1px] border-[#000000] border-opacity-25">
@@ -44,8 +51,8 @@ const Header = () => {
 
      <div className="flex items-center gap-7">
      <div className="flex items-center gap-2">
-        <img className={`${selectedLevel.selectedLevel!==levelList.length-1 && 'cursor-pointer'}`} src={`${selectedLevel.selectedLevel==levelList.length-1?"images/arrowDownBorderRoundDisable.svg":"images/arrowDownBorderRound.svg"}`}   alt="arrowdown" onClick={()=>{selectedLevel.selectedLevel!==levelList.length-1 && selectedLevel.onDown()}} />
-        <img className={`${selectedLevel.selectedLevel!==0 && 'cursor-pointer' }`} src={`${selectedLevel.selectedLevel==0?"images/arrowUpBorderRound.svg":"images/arrowUpBorderRoundEnable.svg"}`} alt="arrowup" onClick={()=>{selectedLevel.selectedLevel!==0 && selectedLevel.onUp()}} />
+        <img className={`${selectedLevelIndex!==levelList.length-1 && 'cursor-pointer'}`} src={`${selectedLevelIndex==levelList.length-1?"images/arrowDownBorderRoundDisable.svg":"images/arrowDownBorderRound.svg"}`}   alt="arrowdown" onClick={()=>{selectedLevelIndex!==levelList.length-1 && selectHandle(selectedLevelIndex+1)}} />
+        <img className={`${selectedLevelIndex!==0 && 'cursor-pointer' }`} src={`${selectedLevelIndex==0?"images/arrowUpBorderRound.svg":"images/arrowUpBorderRoundEnable.svg"}`} alt="arrowup" onClick={()=>{selectedLevelIndex!==0 && selectHandle(selectedLevelIndex-1)}} />
         <p className="text-[#0c0c0c] text-[17px] font-semibold">
           جابجایی مراحل
         </p>

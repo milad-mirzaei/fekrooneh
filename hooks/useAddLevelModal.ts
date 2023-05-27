@@ -8,7 +8,7 @@ interface AddLevelModalStore{
 }
 
 const useAddLevelModal = create<AddLevelModalStore>((set)=>({
-    isOpen:true,
+    isOpen:false,
     onOpen:()=>set({isOpen:true}),
     onClose:()=>set({isOpen:false})
 }))
