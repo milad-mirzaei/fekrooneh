@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import RightSideBarSelect from "../RightSideBarSelect";
-import useLevels, { Level } from "../../hooks/useLevels";
+import LevelsHook, { Level } from "../../hooks/useLevels";
 import Image from 'next/image';
 
 
 const RigtSideBar = () => {
  
-  const levels = useLevels();
+  const levels = LevelsHook();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex((level)=>level.isSelected == true);
   const currentLevel = levelsList[selectedLevelIndex];

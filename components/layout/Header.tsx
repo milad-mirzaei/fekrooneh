@@ -1,13 +1,13 @@
 
 import React from "react";
-import useLevels from "../../hooks/useLevels";
+import LevelsHook from "../../hooks/useLevels";
 import useSettingsModal from "../../hooks/useSettingsModal";
 import Image from 'next/image';
 
 const Header = () => {
 
   // const selectedLevel = useSelectedLevel();
-  const levels=useLevels();
+  const levels=LevelsHook();
   const levelList=levels.levels;
   const settingsModal= useSettingsModal();
   const selectedLevelIndex = levelList.findIndex((level)=>level.isSelected == true);

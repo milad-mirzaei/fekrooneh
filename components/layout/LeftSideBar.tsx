@@ -1,10 +1,10 @@
 import React from "react";
 import LevelCard from "../LevelCard";
-import useLevels from "../../hooks/useLevels";
+import LevelsHook from "../../hooks/useLevels";
 import useAddLevelModal from "../../hooks/useAddLevelModal";
 
 const LeftSideBar = () => {
-  const levels = useLevels();
+  const levels = LevelsHook();
   const levelsList = levels.levels;
   const addLevelModal = useAddLevelModal();
 

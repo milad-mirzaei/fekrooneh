@@ -100,7 +100,7 @@ const gozineMasks = [
     "images/GozineMask3.svg",
   ];
 
-const useLevels = create<LevelsStore>((set)=>({
+const LevelsHook = create<LevelsStore>((set)=>({
     levels:[
         {
             id:uuidv4(),
@@ -163,4 +163,4 @@ const useLevels = create<LevelsStore>((set)=>({
     }
 }))
 
-export default useLevels;
+export default LevelsHook;

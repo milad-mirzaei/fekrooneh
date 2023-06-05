@@ -3,11 +3,11 @@ import ChaharGozine from "@/components/levelTypes/fourChoice/ChaharGozine";
 import Pairing from "@/components/levelTypes/pairing/Pairing";
 import SequenceAndOrder from "@/components/levelTypes/sequenceAndOrder/SequenceAndOrder";
 import TrueFalse from "@/components/levelTypes/trueFalse/TrueFalse";
-import useLevels from "@/hooks/useLevels";
+import LevelsHook from "@/hooks/useLevels";
 
 export default function Home() {
 
-  const levels = useLevels();
+  const levels = LevelsHook();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(
     (level) => level.isSelected == true

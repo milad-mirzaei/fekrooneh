@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import useLevels from "../hooks/useLevels";
+import LevelsHook from "../hooks/useLevels";
 import Image from 'next/image';
 
 import {
@@ -28,7 +28,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
   choices,
   handleOpen,
 }) => {
-  const levels = useLevels();
+  const levels = LevelsHook();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(
     (level) => level.isSelected == true

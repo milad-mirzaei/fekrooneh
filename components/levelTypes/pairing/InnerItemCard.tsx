@@ -4,8 +4,8 @@ import AnswerText from '../../AnswerText';
 import AnswerButton from '../../AnswerButton';
 import Image from 'next/image';
 
-import useAddImageModal from '@/hooks/useAddImageModal';
-import useLevels, { PairingInnerItem } from '@/hooks/useLevels';
+import AddImageModalHook from '@/hooks/useAddImageModal';
+import LevelsHook, { PairingInnerItem } from '@/hooks/useLevels';
 
 
 interface InnerCardProps{
@@ -17,9 +17,9 @@ const InnerItemCard:React.FC<InnerCardProps> = ({item,parentIndex,index}) => {
 
     const [hasText, setHasText] = useState(false);
 
-    const addImageModal= useAddImageModal();
+    const addImageModal= AddImageModalHook();
 
-    const levels = useLevels();
+    const levels = LevelsHook();
     const levelsList = levels.levels;
     const selectedLevelIndex = levels.levels.findIndex(
       (level) => level.isSelected == true

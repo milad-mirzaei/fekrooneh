@@ -1,17 +1,17 @@
 import React from 'react'
-import useAudioModal from '../../../hooks/useAudioModal';
-import useAddImageModal from '../../../hooks/useAddImageModal';
-import useLevels from '../../../hooks/useLevels';
+import AudioModalHook from '../../../hooks/useAudioModal';
+import AddImageModalHook from '../../../hooks/useAddImageModal';
+import LevelsHook from '../../../hooks/useLevels';
 import Image from 'next/image';
 
 
 
 const TrueFalse = () => {
   
-    const audioModal = useAudioModal();
-    const addImageModal = useAddImageModal();
+    const audioModal = AudioModalHook();
+    const addImageModal = AddImageModalHook();
 
-    const levels = useLevels();
+    const levels = LevelsHook();
   
     const levelsList = levels.levels;
     const selectedLevelIndex = levelsList.findIndex(
