@@ -12,7 +12,7 @@ interface AnswerTextProps{
 
 const AnswerText:React.FC<AnswerTextProps> = ({onChange,value,placeholder,onDelete}) => {
   return (
-    <div  className="relative w-[140px] h-[120px] rounded-[20px] border-[2px] border-white flex group/answer items-center justify-center "
+    <div  className="relative w-full h-[120px] rounded-[20px] border-[2px] border-white flex group/answer items-center justify-center "
         dir="rtl"
         >
           <textarea
