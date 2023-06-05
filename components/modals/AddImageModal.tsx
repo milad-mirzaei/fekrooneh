@@ -3,6 +3,7 @@ import Modal from "../Modal";
 import useLevels from "../../hooks/useLevels";
 import ImageUploading from "react-images-uploading";
 import useAddImageModal from "../../hooks/useAddImageModal";
+import Image from 'next/image';
 
 
 
@@ -111,7 +112,7 @@ const AddImageModal = () => {
                     key={index}
                     className="relative flex items-center justify-center w-[400px] h-[400px]  rounded-[40px] overflow-hidden"
                   >
-                    <img
+                    <Image
                       className=" h-[400px] w-[400px] object-fill "
                       src={image["data_url"]}
                       alt=""

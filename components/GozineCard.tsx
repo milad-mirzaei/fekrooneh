@@ -55,7 +55,7 @@ const GozineCard:React.FC<GozineCardProps> = ({index,onSelect,gozine}) => {
      ${chaharGozineList.length==6 &&' md:w-[135px] md:h-[245px]' } 
 
      w-[180px] h-[257px]  flex items-center justify-center rounded-[13px] ${gozine.color}  border-[3px] border-black `} style={{ boxShadow: "4px 3px black" }}>
-        <img className='absolute top-[71px] right-[5px]' src={gozineMasks[index]} alt="mask" />
+        <Image className='absolute top-[71px] right-[5px]' src={gozineMasks[index]} alt="mask" />
         <p className="absolute text-white text-[28px] font-['yekanbakhfat'] ">{gozine.text}</p>
         <div className='cursor-pointer absolute top-[25px] left-[25px] md:top-[12px] md:left-[12px]  w-[35px] h-[35px] md:w-[30px] md:h-[30px] rounded-full border-[2px] border-white flex justify-center items-center' style={{ boxShadow: "4px 3px black" }} onClick={()=>onSelect(index)}>
             {gozine.isSelected && <div className='w-[18px] h-[18px] rounded-full bg-[#28DE7C]'></div>}

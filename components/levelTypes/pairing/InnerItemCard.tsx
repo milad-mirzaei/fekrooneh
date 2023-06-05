@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AnswerImage from '../../AnswerImage';
 import AnswerText from '../../AnswerText';
 import AnswerButton from '../../AnswerButton';
+import Image from 'next/image';
 
 import useAddImageModal from '@/hooks/useAddImageModal';
 import useLevels, { PairingInnerItem } from '@/hooks/useLevels';
@@ -92,7 +93,7 @@ const InnerItemCard:React.FC<InnerCardProps> = ({item,parentIndex,index}) => {
           style={{ boxShadow: "2px 2px black" }}
           onClick={() =>{addImageModal.onOpen('pairing',parentIndex,index)}}
         >
-          <img
+          <Image
             src="/images/image.svg"
             alt=""
             width={pairingItems.length == 5 ? 15 : pairingItems.length == 6 ? 13 :pairingItems.length == 8?13 :20}

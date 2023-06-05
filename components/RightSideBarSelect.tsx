@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import useLevels from "../hooks/useLevels";
+import Image from 'next/image';
+
 import {
   eightXtwo,
   fiveXtwo,
@@ -118,7 +120,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
       className="flex flex-col justify-start items-start w-full gap-2  transition-all duration-300 "
     >
       <div className="flex justify-start items-center gap-2 pr-5 transition-all duration-300">
-        <img src={titleIcon} alt="gamepad" />
+        <Image src={titleIcon} alt="gamepad" />
         <p className="text-[13px] font-semibold">{title}</p>
       </div>
       <div
@@ -133,7 +135,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
               {selectedIcon && (
                 <div className="relative w-[52px] h-[34px] ">
                   <div className="absolute w-[34px] h-[34px] rounded-full mr-4  bg-[#eaeefb]"></div>
-                  <img
+                  <Image
                     className="absolute -left-2"
                     src={selectedIcon}
                     alt="4gozine"
@@ -155,7 +157,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
               </p>
             </div>
             <div className=" w-[30px] h-[22px] ml-4 mt-1 rounded-[14px] bg-[#ffffff] border-black border-[1px] flex items-center justify-center">
-              <img
+              <Image
                 className={`${
                   isOpen && "rotate-180"
                 } transition-all duration-300`}

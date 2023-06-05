@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image';
 
 
 interface AnswerTextProps{
@@ -46,7 +47,7 @@ const AnswerText:React.FC<AnswerTextProps> = ({onChange,value,placeholder,onDele
               style={{ resize: "none" }}
             />
             <div className="absolute -top-5 right-[50] w-[30px] h-[30px] flex justify-center items-center border-[1px] border-black bg-neutral-600 hover:bg-red-600 transition-all duration-300 rounded-full cursor-pointer" onClick={onDelete}>
-              <img src="/images/closecircle2.svg" alt="" width={20} height={20} />
+              <Image src="/images/closecircle2.svg" alt="" width={20} height={20} />
             </div>
         </div>
   )
