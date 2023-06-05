@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout'
+import AddImageModal from '@/components/modals/AddImageModal'
 import AddLevelModal from '@/components/modals/AddLevelModal'
 import AudioModal from '@/components/modals/AudioModal'
 import SettingsModal from '@/components/modals/SettingsModal'
@@ -9,6 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (<>
       <AudioModal/>
       <SettingsModal/>
+      <AddImageModal/>
       <AddLevelModal/>
     <Layout>
       <Component {...pageProps} />

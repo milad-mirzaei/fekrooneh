@@ -1,14 +1,82 @@
 import {create} from 'zustand'
 import _ from 'lodash'
 
+import { v4 as uuidv4 } from 'uuid';
+import { defaultItems, extraAnswers } from '../constants/defaultFourChoiceItems';
+import { fourXtwo } from '../constants/defaultPairingItems';
+
+export type Gozine={
+    id:string;
+    text?:string;
+    image?:any;
+    mask?:string;
+    color:string;
+    isSelected:boolean;
+}
+
+export type fourChoice = {
+        question?:string;
+        image:any;
+        music:any;
+        video:any;
+        answers:Gozine[];
+        isMultipleChoice:boolean;
+}
+
+
+
+export type trueFalse = {
+    question?:string;
+    image:any;
+    music:any;
+    video:any;
+    answer:'درست'|'غلط';
+}
+
+export type sequenceAndOrder={
+    question?:string;
+    image:any;
+    music:any;
+    video:any;
+    answers:Gozine[];
+    trueSequence:string[];
+    isLtr:boolean;
+}
+
+export type PairingInnerItem=
+{
+    id:string;
+    text?:string;
+    image?:any;
+    color:string;
+}
+
+export type PairingItem={
+    color:string;
+    innerItems:PairingInnerItem[]
+}
+
+export type pairing = {
+    question?:string;
+    image:any;
+    music:any;
+    video:any;
+    arrangeModel:string;
+    pairingItems:PairingItem[];
+}
 
 export type Level = {
     id:string;
-    name:string;
+    type:string;
     icon:string;
     isSelected:boolean;
+    extraAnswers:any[];
     rahnamaColor?:string;
     rahnamaIcon?:string;
+    fourChoice:fourChoice;
+    trueFalse:trueFalse;
+    sequenceAndOrder:sequenceAndOrder;
+    pairing:pairing;
     zaman:number;
     emtiaz:number;
     sakhti:string;
@@ -19,20 +87,58 @@ interface LevelsStore{
     onAdd:(item:Level)=>void;
     onDelete:(item:Level)=>void;
     onCopy:(item:Level)=>void;
-    // onChangeLevelName:(item:Level,name:string)=>void;
-    // onChangeLevelZaman:(item:Level,zaman:number)=>void;
-    // onChangeLevelEmtiaz:(item:Level,emtiaz:number)=>void;
-    // onChangeLevelSakhti:(item:Level,sakhti:string)=>void;
+ 
     onChangeLevel:(item:Level[])=>void;
 }
+
+const gozineMasks = [
+    "images/GozineMask.svg",
+    "images/GozineMask2.svg",
+    "images/GozineMask3.svg",
+    "images/GozineMask1.svg",
+    "images/GozineMask.svg",
+    "images/GozineMask3.svg",
+  ];
 
 const useLevels = create<LevelsStore>((set)=>({
     levels:[
         {
-            id:'',
-            name:'چهار گزینه ای',
+            id:uuidv4(),
+            type:'چهار گزینه ای',
             icon:'images/4gozineLevelIcon.svg',
             isSelected:true,
+            extraAnswers:[...extraAnswers],
+            fourChoice:{
+                answers:[...defaultItems],
+                isMultipleChoice:false,
+                image:null,
+                music:null,
+                video:null,
+            },
+            trueFalse:{
+                answer:'درست',
+                image:null,
+                music:null,
+                video:null,
+                question:'',
+            },
+            sequenceAndOrder:{
+                answers:[...defaultItems].reverse(),
+                image:null,
+                music:null,
+                video:null,
+                trueSequence:[],
+                question:'',
+                isLtr:false
+            },
+            pairing:{
+                question:'',
+                image:null,
+                music:null,
+                video:null,
+                arrangeModel:'4 دسته 2 تایی',
+                pairingItems:fourXtwo
+            },
             zaman:30,
             emtiaz:5,
             sakhti:'آسون'
@@ -52,26 +158,6 @@ const useLevels = create<LevelsStore>((set)=>({
         set((state)=>({levels:state.levels.splice(state.levels.findIndex(lev=>lev.id == item.id),0,item)}))
     },
 
-    // onChangeLevelName:(item,name)=>{
-    //     const newItem = item;
-    //     newItem.name=name;
-    //     set((state)=>({levels:state.levels.splice(state.levels.findIndex(lev=>lev.id == item.id),1,newItem)}));
-    // },
-    // onChangeLevelZaman:(item,zaman)=>{
-    //     const newItem = item;
-    //     newItem.zaman=zaman;
-    //     set((state)=>({levels:state.levels.splice(state.levels.findIndex(lev=>lev.id == item.id),1,newItem)}));
-    // },
-    // onChangeLevelEmtiaz:(item,emtiaz)=>{
-    //     const newItem = item;
-    //     newItem.emtiaz=emtiaz;
-    //     set((state)=>({levels:state.levels.splice(state.levels.findIndex(lev=>lev.id == item.id),1,newItem)}));
-    // },
-    // onChangeLevelSakhti:(item,sakhti)=>{
-    //     const newItem = item;
-    //     newItem.sakhti=sakhti;
-    //     set((state)=>({levels:state.levels.splice(state.levels.findIndex(lev=>lev.id == item.id),1,newItem)}));
-    // },
     onChangeLevel:(levelsList)=>{
         set(()=>({levels:levelsList}));
     }

@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Modal from "../Modal";
 import Input from "../Input";
-import useSettingsModal from "@/hooks/useSettingsModal";
+import useSettingsModal from "../../hooks/useSettingsModal";
+
 
 const SettingsModal = () => {
   const [title, setTitle] = useState("");
@@ -162,7 +163,7 @@ const SettingsModal = () => {
     </div>
   );
 
-  return <Modal isOpen={settingsModal.isOpen} body={bodyContent} />;
+  return <Modal isOpen={settingsModal.isOpen} body={bodyContent} onClose={settingsModal.onClose}/>;
 };
 
 export default SettingsModal;

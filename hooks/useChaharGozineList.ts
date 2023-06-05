@@ -3,8 +3,8 @@ import _ from 'lodash'
 
 export type Gozine={
     id:string;
-    text:string;
-    image?:string;
+    text?:string;
+    image?:FormData;
     color:string;
     isSelected:boolean;
 }
@@ -21,7 +21,6 @@ const useChaharGozineList = create<ChaharGozineListStore>((set)=>({
         {
             id:'',
             text:'',
-            image:'',
             color:'bg-[#ffb72a]',
             isSelected:true,
             
@@ -29,7 +28,6 @@ const useChaharGozineList = create<ChaharGozineListStore>((set)=>({
         {
             id:'',
             text:'',
-            image:'',
             color:'bg-[#7900FF]',
             isSelected:false,
             
@@ -37,7 +35,6 @@ const useChaharGozineList = create<ChaharGozineListStore>((set)=>({
         {
             id:'',
             text:'',
-            image:'',
             color:'bg-[#B2FFD6]',
             isSelected:false,
             
@@ -45,7 +42,6 @@ const useChaharGozineList = create<ChaharGozineListStore>((set)=>({
         {
             id:'',
             text:'',
-            image:'',
             color:'bg-[#FF836F]',
             isSelected:false,
             

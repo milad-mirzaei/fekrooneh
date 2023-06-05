@@ -1,7 +1,7 @@
-import useLevels from "@/hooks/useLevels";
-import useSelectedLevel from "@/hooks/useSelectedLevel";
-import useSettingsModal from "@/hooks/useSettingsModal";
+
 import React from "react";
+import useLevels from "../../hooks/useLevels";
+import useSettingsModal from "../../hooks/useSettingsModal";
 
 const Header = () => {
 
@@ -25,8 +25,8 @@ const Header = () => {
           className="w-[169px] h-[54px] flex justify-center gap-1 items-center bg-buttonGradient rounded-[100px]"
           style={{ boxShadow: "3px 2px black" }}
         >
-          <p className="text-lg font-extrabold">تم ها</p>
-          <img src="images/brush.svg" alt="brush" />
+          <p className="text-[15px] font-extrabold">تم ها</p>
+          <img src="images/brush.svg" alt="brush" width={21} />
         </div>
         <div className="flex justify-center items-center gap-1">
           <img src="images/stored.svg" alt="" />
@@ -35,8 +35,8 @@ const Header = () => {
       </div>
       <div className="flex gap-3">
         <div className="w-[261px] h-[52px] flex justify-center items-center border-[1px] border-black rounded-[34px] ">
-          <p className="text-lg text-[#aaaaaa] ml-3">نام بازی :</p>
-          <p className="text-xl text-[#000000] font-extrabold ml-3">
+          <p className="text-md text-[#aaaaaa] ml-3">نام بازی :</p>
+          <p className="text-md text-[#000000] font-extrabold ml-3">
             پرتقال من کجاست؟
           </p>
         </div>

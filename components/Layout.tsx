@@ -9,11 +9,11 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <div dir="rtl" className="h-screen w-screen">
       <Navbar />
       <Header />
-      <div className="w-full md:h-[597px]  grid grid-cols-10">
+      <div className="w-full md:h-[597px]  grid grid-cols-12">
         <RigtSideBar />
         <div
           className="
-            col-span-6
+            col-span-8
             "
         >
           {children}
