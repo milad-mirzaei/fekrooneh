@@ -324,6 +324,7 @@ const SequenceAndOrder = () => {
         >
           {answers.map((ans, index) => (
             <div
+            key={ans.id}
               className={`transition-all duration-500 ${
                 answers.length == 5 && " md:w-[170px] md:h-[37px]"
               } 

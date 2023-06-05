@@ -18,7 +18,7 @@ const AddLevelModal = () => {
     <div className="flex justify-start items-start p-10 gap-4">
       <div className="flex flex-col flex-1 items-center justify-start gap-2 ">
         {models.map((model) => (
-          <div className={`w-full h-[44px] flex items-center group/gameType hover:bg-black rounded-[50px] border-[1px] border-black border-opacity-20 px-7  gap-4  cursor-pointer ${model == selectedType && 'bg-black'} `} onClick={()=>setSelectedType(model)} >
+          <div key={model} className={`w-full h-[44px] flex items-center group/gameType hover:bg-black rounded-[50px] border-[1px] border-black border-opacity-20 px-7  gap-4  cursor-pointer ${model == selectedType && 'bg-black'} `} onClick={()=>setSelectedType(model)} >
             <div className="w-[20px] h-[20px] bg-[#D9D9D9] rounded-[7px]"></div>
             <p className={`font-bold text-[14px] group-hover/gameType:text-white ${model == selectedType && 'text-white'}`}>{model}</p>
           </div>

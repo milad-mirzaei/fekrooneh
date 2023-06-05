@@ -88,6 +88,7 @@ const AudioModal = () => {
             image={item.image}
             name={item.title}
             index={index}
+            key={index}
           />
         ))}
       </div>
@@ -128,7 +129,7 @@ const AudioModal = () => {
           />
         )}
         {useVoices.voices.map((item, index) => (
-          <div>
+          <div key={index}>
             <div className="flex flex-row items-center gap-2 justify-center">
               <div
                 className="w-[50px] h-[50px] group bg-neutral-200 rounded-[20px] cursor-pointer flex items-center justify-center"

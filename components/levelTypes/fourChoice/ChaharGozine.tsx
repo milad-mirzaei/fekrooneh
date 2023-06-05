@@ -234,6 +234,7 @@ const chaharGozine = () => {
             <GozineCard
               index={index}
               gozine={gozine}
+              key={gozine.id}
             />
           ))}
         </div>

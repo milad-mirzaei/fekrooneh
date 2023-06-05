@@ -98,7 +98,7 @@ const Pairing = () => {
       {pairingItems.map((item,index)=>(
         <PairingCard
         item={item}
-        
+        key={index}
         index={index}
         />
       ))}

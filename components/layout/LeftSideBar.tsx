@@ -27,7 +27,7 @@ const LeftSideBar = () => {
       </div>
       <div className="levelsScroll  flex flex-col pt-2 items-center gap-2  w-[237px] mr-2 h-[557px] md:h-[475px] overflow-y-scroll">
         {levelsList.map((item, index) => (
-          <div className="h-[225px]" key={index}>
+          <div  className="h-[225px]" key={index}>
             <LevelCard index={index} level={item} />
           </div>
         ))}

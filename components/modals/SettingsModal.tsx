@@ -135,7 +135,7 @@ const SettingsModal = () => {
           </div>
           <div className="flex gap-2 flex-wrap">
             {tagList.map((t, i) => (
-              <div className="h-[47px] p-2 px-4 flex items-center justify-start bg-[#D7D7D7] rounded-[25px] gap-1 ">
+              <div key={t} className="h-[47px] p-2 px-4 flex items-center justify-start bg-[#D7D7D7] rounded-[25px] gap-1 ">
                 <Image
                   className="cursor-pointer"
                   src="images/closecircle.svg"

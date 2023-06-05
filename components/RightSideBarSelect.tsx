@@ -171,7 +171,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
             {isOpen &&
               choices.map((item, index) => {
                 return (
-                  <div
+                  <div key={item}
                     className={` w-full md:h-[45px] py-3 rounded-[30px] border-[1px] border-black px-4  flex items-center justify-start hover:bg-black hover:text-white transition-all duration-300 ${
                      ( parseInt(item) == currentLevel.zaman ||
                         parseInt(item) == currentLevel.emtiaz ||
