@@ -1,16 +1,16 @@
 import {create} from 'zustand'
 
 
-interface AudioModalStore{
+interface AudioModalHookStore{
     isOpen:boolean;
     onOpen:()=>void;
     onClose:()=>void;
 }
 
-const useAudioModal = create<AudioModalStore>((set)=>({
+const AudioModalHook = create<AudioModalHookStore>((set)=>({
     isOpen:false,
     onOpen:()=>set({isOpen:true}),
     onClose:()=>set({isOpen:false})
 }))
 
-export default useAudioModal;
+export default AudioModalHook;

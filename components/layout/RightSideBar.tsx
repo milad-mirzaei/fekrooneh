@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import RightSideBarSelect from "../RightSideBarSelect";
-import useLevels, { Level } from "../../hooks/useLevels";
+import LevelsHook, { Level } from "../../hooks/useLevels";
 import Image from "next/image";
 
 
 const RigtSideBar = () => {
  
-  const levels = useLevels();
+  const levels = LevelsHook();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex((level)=>level.isSelected == true);
   const currentLevel = levelsList[selectedLevelIndex];
@@ -125,7 +125,7 @@ const RigtSideBar = () => {
       </div>
       <div className="grid grid-cols-2 gap-2">
         {effects.map((item, index) => (
-          <div onClick={()=>{setSelectedEffect(index)}} className="flex flex-col items-center gap-1">
+          <div key={index} onClick={()=>{setSelectedEffect(index)}} className="flex flex-col items-center gap-1">
             <div className={`w-[111px] h-[67px] border-[.8px] rounded-[10px]  transition-all duration-400 ${selectedEffect == index && 'border-[#0066ff] border-[1.6px]'} `}></div>
             <p>{item}</p>
           </div>

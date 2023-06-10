@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
-import useLevels from "../../hooks/useLevels";
+import LevelsHook from "../../hooks/useLevels";
 import useAddLevelModal from "../../hooks/useAddLevelModal";
 import useGameModels from "../../hooks/useGameModels";
 import { v4 as uuidv4 } from "uuid";
@@ -8,7 +8,7 @@ import { fourXtwo } from "../../constants/defaultPairingItems";
 import { defaultItems, extraAnswers } from "../../constants/defaultFourChoiceItems";
 
 const AddLevelModal = () => {
-  const levels = useLevels();
+  const levels = LevelsHook();
 
   const addLevelModal = useAddLevelModal();
   const { models } = useGameModels();

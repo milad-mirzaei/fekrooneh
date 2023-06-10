@@ -1,16 +1,16 @@
 
 import React, { useRef } from "react";
 import GozineCard from "../fourChoice/GozineCard";
-import useAudioModal from "@/hooks/useAudioModal";
-import useAddImageModal from "@/hooks/useAddImageModal";
-import useLevels from "@/hooks/useLevels";
+import AudioModalHook from "@/hooks/useAudioModal";
+import AddImageModalHook from "@/hooks/useAddImageModal";
+import LevelsHook from "@/hooks/useLevels";
 import Image from "next/image";
 
 const Descriptive = () => {
-  const audioModal = useAudioModal();
-  const addImageModal = useAddImageModal();
+  const audioModal = AudioModalHook();
+  const addImageModal = AddImageModalHook();
 
-  const levels = useLevels();
+  const levels = LevelsHook();
 
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(

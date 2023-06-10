@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../Modal";
-import useLevels from "../../hooks/useLevels";
+import LevelsHook from "../../hooks/useLevels";
 import ImageUploading from "react-images-uploading";
-import useAddImageModal from "../../hooks/useAddImageModal";
+import AddImageModalHook from "../../hooks/useAddImageModal";
 import Image from "next/image";
 
 
 
 
 const AddImageModal = () => {
-  const addImageModal = useAddImageModal();
+  const addImageModal = AddImageModalHook();
   const imageModalType = addImageModal.type;
   const imageModalItemIndex= addImageModal.itemIndex;
   const imageModalInnerItemIndex= addImageModal.innerItemIndex;
@@ -23,7 +23,7 @@ const AddImageModal = () => {
     setImages(imageList);
   };
 
-  const levels=useLevels();
+  const levels=LevelsHook();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex((level)=>level.isSelected == true);
   const currentLevel = levelsList[selectedLevelIndex];

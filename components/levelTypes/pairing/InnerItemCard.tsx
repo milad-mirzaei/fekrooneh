@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import AnswerImage from '../../AnswerImage';
 import AnswerText from '../../AnswerText';
 import AnswerButton from '../../AnswerButton';
-import useLevels, { PairingInnerItem } from '@/hooks/useLevels';
-import useAddImageModal from '@/hooks/useAddImageModal';
+import LevelsHook, { PairingInnerItem } from '@/hooks/useLevels';
+import AddImageModalHook from '@/hooks/useAddImageModal';
 import Image from 'next/image';
 
 
@@ -16,9 +16,9 @@ interface InnerCardProps{
 const InnerItemCard:React.FC<InnerCardProps> = ({item,parentIndex,index}) => {
 
 
-    const addImageModal= useAddImageModal();
+    const addImageModal= AddImageModalHook();
 
-    const levels = useLevels();
+    const levels = LevelsHook();
     const levelsList = levels.levels;
     const selectedLevelIndex = levels.levels.findIndex(
       (level) => level.isSelected == true

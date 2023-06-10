@@ -2,17 +2,17 @@
 import React from 'react'
 import DialogQuestionEditable from './DialogQuestionEditable';
 import { v4 as uuidv4 } from "uuid";
-import useAudioModal from '@/hooks/useAudioModal';
-import useAddImageModal from '@/hooks/useAddImageModal';
-import useLevels from '@/hooks/useLevels';
+import AudioModalHook from '@/hooks/useAudioModal';
+import AddImageModalHook from '@/hooks/useAddImageModal';
+import LevelsHook from '@/hooks/useLevels';
 import Image from 'next/image';
 
 
 const DialogBox = () => {
-    const audioModal = useAudioModal();
-    const addImageModal = useAddImageModal();
+    const audioModal = AudioModalHook();
+    const addImageModal = AddImageModalHook();
 
-    const levels = useLevels();
+    const levels = LevelsHook();
 
     const levelsList = levels.levels;
     const selectedLevelIndex = levelsList.findIndex(
@@ -133,7 +133,7 @@ const DialogBox = () => {
             {question.map((item,index)=>
             item.text !== null ?<div key={index} style={{zIndex:50-index}}><DialogQuestionEditable index={index} key={index} /></div>
              :
-             <div className="relative flex justify-center items-center">
+             <div key={index} className="relative flex justify-center items-center">
               <div className={`relative flex justify-center items-center gap-2 min-w-full p-[10px] bg-white border-dashed  border-[2px] border-black rounded-[15px] cursor-pointer  `} 
               style={{  zIndex:100-index }}
               onClick={()=>handleOpenDialog(index)}

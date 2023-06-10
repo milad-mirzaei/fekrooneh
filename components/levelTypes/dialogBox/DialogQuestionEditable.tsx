@@ -1,5 +1,5 @@
 
-import useLevels from '@/hooks/useLevels';
+import LevelsHook from '@/hooks/useLevels';
 import React  from 'react'
 
 
@@ -25,7 +25,7 @@ function getCaretPosition(element: HTMLElement): number {
 const DialogQuestionEditable:React.FC<DialogQuestionEditableProps> = ({index}) => {
 
 
-    const levels = useLevels();
+    const levels = LevelsHook();
 
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(

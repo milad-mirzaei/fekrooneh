@@ -14,12 +14,12 @@ import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
 import { AiFillDelete } from "react-icons/ai";
 import Image from "next/image";
-import useAudioModal from "../../hooks/useAudioModal";
+import AudioModalHook from "../../hooks/useAudioModal";
 import useGameVoices from "../../hooks/useGameVoices";
 import useGameMusics from "../../hooks/useGameMusics";
 
 const AudioModal = () => {
-  const audioModal = useAudioModal();
+  const audioModal = AudioModalHook();
   const useVoices = useGameVoices();
   const voiceRef = useRef<HTMLAudioElement>(null);
   const voicePishRef = useRef<HTMLAudioElement>(null);

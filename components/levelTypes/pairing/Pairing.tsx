@@ -1,12 +1,12 @@
 import React from 'react'
 import PairingCard from './PairingCard'
-import useLevels from '@/hooks/useLevels';
+import LevelsHook from '@/hooks/useLevels';
 import Image from 'next/image';
 
 
 const Pairing = () => {
 
-  const levels = useLevels();
+  const levels = LevelsHook();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(
     (level) => level.isSelected == true

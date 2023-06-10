@@ -2,7 +2,7 @@ import React from 'react'
 
 
 import InnerItemCard from './InnerItemCard';
-import useLevels, { PairingItem } from '@/hooks/useLevels';
+import LevelsHook, { PairingItem } from '@/hooks/useLevels';
 
 
 interface PairingCardProps{
@@ -15,7 +15,7 @@ interface PairingCardProps{
 const PairingCard:React.FC<PairingCardProps> = ({item,index}) => {
 
 
-    const levels = useLevels();
+    const levels = LevelsHook();
     const selectedLevelIndex = levels.levels.findIndex(
       (level) => level.isSelected == true
     );

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import  { Gozine } from "../../../hooks/useLevels";
-import useLevels from "../../../hooks/useLevels";
+import LevelsHook from "../../../hooks/useLevels";
 import _ from "lodash";
-import useAddImageModal from "../../../hooks/useAddImageModal";
+import AddImageModalHook from "../../../hooks/useAddImageModal";
 import AnswerText from "../../AnswerText";
 import AnswerImage from "../../AnswerImage";
 
@@ -13,9 +13,9 @@ interface GozineCardProps {
 }
 
 const GozineCard: React.FC<GozineCardProps> = ({ index, gozine }) => {
-  const addImageModal = useAddImageModal();
+  const addImageModal = AddImageModalHook();
 
-  const levels = useLevels();
+  const levels = LevelsHook();
   const levelsList = levels.levels;
   const selectedLevelIndex = levels.levels.findIndex(
     (level) => level.isSelected == true

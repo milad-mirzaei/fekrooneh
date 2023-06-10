@@ -3,19 +3,19 @@ import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { GrClose } from "react-icons/gr";
 import QuestionEditable from "./QuestionEditable";
-import useAudioModal from "@/hooks/useAudioModal";
-import useAddImageModal from "@/hooks/useAddImageModal";
-import useLevels from "@/hooks/useLevels";
+import AudioModalHook from "@/hooks/useAudioModal";
+import AddImageModalHook from "@/hooks/useAddImageModal";
+import LevelsHook from "@/hooks/useLevels";
 import Image from "next/image";
 
 const DragAndDrop = () => {
-  const audioModal = useAudioModal();
-  const addImageModal = useAddImageModal();
+  const audioModal = AudioModalHook();
+  const addImageModal = AddImageModalHook();
 
   const [uncorrectAnswer, setUncorrectAnswer] = useState('');
   const addUncorrectAnswerRef = useRef<HTMLInputElement>(null);
 
-  const levels = useLevels();
+  const levels = LevelsHook();
 
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(

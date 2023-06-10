@@ -5,7 +5,7 @@ import AddImageModal from "./components/modals/AddImageModal";
 import AddLevelModal from "./components/modals/AddLevelModal";
 import Layout from "./components/Layout";
 import ChaharGozine from "./components/levelTypes/fourChoice/ChaharGozine";
-import useLevels from "./hooks/useLevels";
+import LevelsHook from "./hooks/useLevels";
 import TrueFalse from "./components/levelTypes/trueFalse/TrueFalse";
 import SequenceAndOrder from "./components/levelTypes/sequenceAndOrder/SequenceAndOrder";
 import Pairing from "./components/levelTypes/pairing/Pairing";
@@ -15,7 +15,7 @@ import DialogBox from "./components/levelTypes/dialogBox/DialogBox";
 
 
 const GameBuilderApp = () => {
-  const levels = useLevels();
+  const levels = LevelsHook();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(
     (level) => level.isSelected == true

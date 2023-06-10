@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Gozine } from "../../../hooks/useLevels";
-import useAudioModal from "../../../hooks/useAudioModal";
-import useAddImageModal from "../../../hooks/useAddImageModal";
-import useLevels from "../../../hooks/useLevels";
+import AudioModalHook from "../../../hooks/useAudioModal";
+import AddImageModalHook from "../../../hooks/useAddImageModal";
+import LevelsHook from "../../../hooks/useLevels";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 import { v4 as uuidv4 } from "uuid";
@@ -10,10 +10,10 @@ import SequenceAndOrderCard from "./SequenceAndOrderCard";
 import Image from "next/image";
 
 const SequenceAndOrder = () => {
-  const audioModal = useAudioModal();
-  const addImageModal = useAddImageModal();
+  const audioModal = AudioModalHook();
+  const addImageModal = AddImageModalHook();
 
-  const levels = useLevels();
+  const levels = LevelsHook();
 
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(

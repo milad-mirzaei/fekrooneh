@@ -3,7 +3,7 @@ import {create} from 'zustand'
 // type ImageModalType='levelImage'|'answer1'|'answer2'|'answer3'|'answer4'|'answer5'|'answer6';
 
 
-interface AddImageModalStore{
+interface AddImageModalHookStore{
     isOpen:boolean;
     type:string;
     itemIndex:number|null;
@@ -12,7 +12,7 @@ interface AddImageModalStore{
     onClose:()=>void;
 }
 
-const useAddImageModal = create<AddImageModalStore>((set)=>({
+const AddImageModalHook = create<AddImageModalHookStore>((set)=>({
     isOpen:false,
     type:'levelImage',
     itemIndex:null,
@@ -21,4 +21,4 @@ const useAddImageModal = create<AddImageModalStore>((set)=>({
     onClose:()=>set({isOpen:false})
 }))
 
-export default useAddImageModal;
+export default AddImageModalHook;

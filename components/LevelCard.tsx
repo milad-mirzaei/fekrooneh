@@ -1,5 +1,5 @@
 import React from "react";
-import useLevels, { Level } from "../hooks/useLevels";
+import LevelsHook, { Level } from "../hooks/useLevels";
 import Image from "next/image";
 
 interface LevelCardProps {
@@ -8,7 +8,7 @@ interface LevelCardProps {
 }
 
 const LevelCard: React.FC<LevelCardProps> = ({ index, level }) => {
-  const levels = useLevels();
+  const levels = LevelsHook();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(
     (level) => level.isSelected == true

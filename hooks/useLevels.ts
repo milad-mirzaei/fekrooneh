@@ -113,7 +113,7 @@ export type Level = {
     sakhti:string;
 }
 
-interface LevelsStore{
+interface LevelsHookStore{
     levels:Level[];
     onAdd:(item:Level)=>void;
     onDelete:(item:Level)=>void;
@@ -131,7 +131,7 @@ const gozineMasks = [
     "images/GozineMask3.svg",
   ];
 
-const useLevels = create<LevelsStore>((set)=>({
+const LevelsHook = create<LevelsHookStore>((set)=>({
     levels:JSON.parse(JSON.stringify(defaultLevels)),
     // levels:[
     //     {
@@ -221,4 +221,4 @@ const useLevels = create<LevelsStore>((set)=>({
     }
 }))
 
-export default useLevels;
+export default LevelsHook;
