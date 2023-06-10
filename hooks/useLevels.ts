@@ -4,10 +4,11 @@ import _ from 'lodash'
 import { v4 as uuidv4 } from 'uuid';
 import { defaultItems, extraAnswers } from '../constants/defaultFourChoiceItems';
 import { fourXtwo } from '../constants/defaultPairingItems';
+import { defaultLevels } from '../constants/defaultLevels';
 
 export type Gozine={
     id:string;
-    text?:string;
+    text?:string|null;
     image?:any;
     mask?:string;
     color:string;
@@ -46,7 +47,7 @@ export type sequenceAndOrder={
 export type PairingInnerItem=
 {
     id:string;
-    text?:string;
+    text?:string | null;
     image?:any;
     color:string;
 }
@@ -65,6 +66,33 @@ export type pairing = {
     pairingItems:PairingItem[];
 }
 
+export type descriptive = {
+    question?:string;
+    image:any;
+    music:any;
+    video:any;
+    mainAnswer:string;
+    otherAnswers:string[];
+}
+
+export type dragAndDrop ={
+    image:any,
+    music:any;
+    video:any;
+    question:{id:string,text:string|null,blank:string|null}[];
+    extraAnswers:{id:string,text:string}[]
+    caretPosition:number;
+    currentItemPosition:number;
+}
+export type dialogBox ={
+    image:any,
+    music:any,
+    video:any,
+    question:{id:string,text:string|null,dialog:{choices:string[],trueAnswer:number,isOpen:boolean }|null}[]
+    caretPosition:number;
+    currentItemPosition:number;
+}
+
 export type Level = {
     id:string;
     type:string;
@@ -77,6 +105,9 @@ export type Level = {
     trueFalse:trueFalse;
     sequenceAndOrder:sequenceAndOrder;
     pairing:pairing;
+    descriptive:descriptive;
+    dragAndDrop:dragAndDrop;
+    dialogBox:dialogBox;
     zaman:number;
     emtiaz:number;
     sakhti:string;
@@ -100,50 +131,77 @@ const gozineMasks = [
     "images/GozineMask3.svg",
   ];
 
-const LevelsHook = create<LevelsStore>((set)=>({
-    levels:[
-        {
-            id:uuidv4(),
-            type:'چهار گزینه ای',
-            icon:'images/4gozineLevelIcon.svg',
-            isSelected:true,
-            extraAnswers:[...extraAnswers],
-            fourChoice:{
-                answers:[...defaultItems],
-                isMultipleChoice:false,
-                image:null,
-                music:null,
-                video:null,
-            },
-            trueFalse:{
-                answer:'درست',
-                image:null,
-                music:null,
-                video:null,
-                question:'',
-            },
-            sequenceAndOrder:{
-                answers:[...defaultItems].reverse(),
-                image:null,
-                music:null,
-                video:null,
-                trueSequence:[],
-                question:'',
-                isLtr:false
-            },
-            pairing:{
-                question:'',
-                image:null,
-                music:null,
-                video:null,
-                arrangeModel:'4 دسته 2 تایی',
-                pairingItems:fourXtwo
-            },
-            zaman:30,
-            emtiaz:5,
-            sakhti:'آسون'
-        },
-    ],
+const useLevels = create<LevelsStore>((set)=>({
+    levels:JSON.parse(JSON.stringify(defaultLevels)),
+    // levels:[
+    //     {
+    //         id:uuidv4(),
+    //         type:'چهار گزینه ای',
+    //         icon:'images/4gozineLevelIcon.svg',
+    //         isSelected:true,
+    //         extraAnswers:JSON.parse(JSON.stringify(extraAnswers)),
+    //         fourChoice:{
+    //             answers:JSON.parse(JSON.stringify(defaultItems)),
+    //             isMultipleChoice:false,
+    //             image:null,
+    //             music:null,
+    //             video:null,
+    //         },
+    //         trueFalse:{
+    //             answer:'درست',
+    //             image:null,
+    //             music:null,
+    //             video:null,
+    //             question:'',
+    //         },
+    //         sequenceAndOrder:{
+    //             answers:JSON.parse(JSON.stringify(defaultItems)).reverse(),
+    //             image:null,
+    //             music:null,
+    //             video:null,
+    //             trueSequence:[],
+    //             question:'',
+    //             isLtr:false
+    //         },
+    //         pairing:{
+    //             question:'',
+    //             image:null,
+    //             music:null,
+    //             video:null,
+    //             arrangeModel:'4 دسته 2 تایی',
+    //             pairingItems:fourXtwo
+    //         },
+    //         descriptive:{
+    //             question:'',
+    //             image:null,
+    //             music:null,
+    //             video:null,
+    //             mainAnswer:'',
+    //             otherAnswers:['']
+    //         },
+    //         dragAndDrop:{
+    //             image:null,
+    //             music:null,
+    //             video:null,
+    //             question:[{id:uuidv4(),text:'',blank:null}],
+    //             extraAnswers:[],
+    //             caretPosition:0,
+    //             currentItemPosition:0
+    //         },
+    //         dialogBox:{
+    //             image:null,
+    //             music:null,
+    //             video:null,
+    //             question:[{id:uuidv4(),text:'',dialog:null}],
+    //             caretPosition:0,
+    //             currentItemPosition:0
+    //         },
+    //         zaman:30,
+    //         emtiaz:5,
+    //         sakhti:'آسون'
+    //     },
+    // ],
+    
     onAdd:(item)=>{
         set((state)=>({
             levels:[...state.levels,item]
@@ -163,4 +221,4 @@ const LevelsHook = create<LevelsStore>((set)=>({
     }
 }))
 
-export default LevelsHook;
+export default useLevels;

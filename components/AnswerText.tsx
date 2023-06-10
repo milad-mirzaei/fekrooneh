@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image';
 
 
 interface AnswerTextProps{
@@ -12,26 +11,29 @@ interface AnswerTextProps{
 
 const AnswerText:React.FC<AnswerTextProps> = ({onChange,value,placeholder,onDelete}) => {
   return (
-    <div  className="relative w-full h-[120px] rounded-[20px] border-[2px] border-white flex group/answer items-center justify-center "
+    <div  className="relative w-full h-[120px] rounded-[20px] group/answer flex  items-center justify-center "
         dir="rtl"
         >
-          <textarea
+          <div>
+            <textarea
               disabled={false}
               onChange={(e) => {
                onChange(e.target.value)
               }}
               value={value}
               placeholder={placeholder}
-              rows={3}
+              
               maxLength={30}
               className={`
               overflow-hidden
               textarea
-              w-full
-              p-3 
-              text-[17px] 
+              w-full 
+              
+              text-[18px] 
               font-bold
               bg-transparent
+              text-center
+              align-middle
               outline-none
               text-black
               placeholder:text-black
@@ -46,8 +48,10 @@ const AnswerText:React.FC<AnswerTextProps> = ({onChange,value,placeholder,onDele
             `}
               style={{ resize: "none" }}
             />
-            <div className="absolute -top-5 right-[50] w-[30px] h-[30px] flex justify-center items-center border-[1px] border-black bg-neutral-600 hover:bg-red-600 transition-all duration-300 rounded-full cursor-pointer" onClick={onDelete}>
-              <Image src="/images/closecircle2.svg" alt="" width={20} height={20} />
+          </div>
+            <div className="absolute -top-6 right-[50] px-[10px] h-[30px] flex justify-center gap-1 items-center border-[1px] border-black bg-neutral-600 hover:bg-red-600 transition-all duration-300 rounded-full cursor-pointer" onClick={onDelete}>
+              <p className='text-white text-[16px]'>حذف متن</p>
+              <img src="/images/closecircle2.svg" alt="" width={20} height={20} />
             </div>
         </div>
   )

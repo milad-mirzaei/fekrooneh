@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image';
+
 
 interface AnswerButtonProps{
     answers:any[];
@@ -19,7 +19,7 @@ const AnswerButton:React.FC<AnswerButtonProps> = ({answers,color,icon,onClick}) 
           style={{ boxShadow: "2px 2px black" }}
           onClick={onClick}
         >
-          <Image
+          <img
             src={icon}
             alt=""
             width={answers.length == 5 ? 15 : answers.length == 6 ?  13 :answers.length == 8?13 :20}

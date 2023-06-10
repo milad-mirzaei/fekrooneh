@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import  { Gozine } from "../../../hooks/useLevels";
-import LevelsHook from "../../../hooks/useLevels";
+import useLevels from "../../../hooks/useLevels";
 import _ from "lodash";
-import AddImageModalHook from "../../../hooks/useAddImageModal";
+import useAddImageModal from "../../../hooks/useAddImageModal";
 import AnswerText from "../../AnswerText";
 import AnswerImage from "../../AnswerImage";
 import AnswerButton from "../../AnswerButton";
@@ -14,7 +14,7 @@ interface SequenceAndOrderCardProps {
 }
 
 const SequenceAndOrderCard: React.FC<SequenceAndOrderCardProps> = ({ index, gozine }) => {
-  const addImageModal = AddImageModalHook();
+  const addImageModal = useAddImageModal();
 
   const gozineMasks = [
     "images/GozineMask.svg",
@@ -25,9 +25,8 @@ const SequenceAndOrderCard: React.FC<SequenceAndOrderCardProps> = ({ index, gozi
     "images/GozineMask3.svg",
   ];
 
-  const [hasText, setHasText] = useState(false);
 
-  const levels = LevelsHook();
+  const levels = useLevels();
   const levelsList = levels.levels;
   const selectedLevelIndex = levels.levels.findIndex(
     (level) => level.isSelected == true
@@ -48,10 +47,10 @@ const SequenceAndOrderCard: React.FC<SequenceAndOrderCardProps> = ({ index, gozi
  
 
   const handleDeleteAnswerImage=()=>{
-      const newList = answers;
-      newList[index].image=null;
-      levelsList[selectedLevelIndex].sequenceAndOrder.answers=newList;
-      levels.onChangeLevel(levelsList);
+    const newLevel = currentLevel;
+    newLevel.sequenceAndOrder.answers[index].image = null;
+    levelsList.splice(selectedLevelIndex, 1, newLevel);
+    levels.onChangeLevel(levelsList);
   }
 
   const handleChangeAnswerText = (text: string) => {
@@ -63,12 +62,17 @@ const SequenceAndOrderCard: React.FC<SequenceAndOrderCardProps> = ({ index, gozi
 
   const handleDeletAnswerText = ()=>{
     const newLevel = currentLevel;
-    setHasText(false);
-    newLevel.sequenceAndOrder.answers[index].text='';
+    newLevel.sequenceAndOrder.answers[index].text = null;
     levelsList.splice(selectedLevelIndex, 1, newLevel);
     levels.onChangeLevel(levelsList);
   }
 
+  const handleAddText = (index:number)=>{
+    const newLevel = currentLevel;
+    newLevel.sequenceAndOrder.answers[index].text = '';
+    levelsList.splice(selectedLevelIndex, 1, newLevel);
+    levels.onChangeLevel(levelsList);
+  }
   return (
     <div
       className={` relative
@@ -81,9 +85,9 @@ const SequenceAndOrderCard: React.FC<SequenceAndOrderCardProps> = ({ index, gozi
      }  border-[3px] border-black `}
       style={{ boxShadow: "4px 3px black" }}
     >
-      <Image
+      <img
         className="absolute top-[50px] right-[5px]"
-        src={gozine.mask!}
+        src={gozine.mask}
         alt="mask"
       />
 
@@ -92,7 +96,7 @@ const SequenceAndOrderCard: React.FC<SequenceAndOrderCardProps> = ({ index, gozi
         onDelete={handleDeleteAnswerImage}
         image={answers[index].image["data_url"]}
         />
-      ):hasText ?(
+      ):answers[index].text !== null?(
         <AnswerText
         onChange={handleChangeAnswerText}
         value={answers[index].text!}
@@ -102,7 +106,7 @@ const SequenceAndOrderCard: React.FC<SequenceAndOrderCardProps> = ({ index, gozi
         ):null}
 
       <div className="absolute bottom-[24px] md:bottom-[17px] flex justify-center items-center gap-1 " dir="rtl">
-      {(answers[index].image || hasText ) ? '': 
+      {(answers[index].image || answers[index].text !== null ) ? '': 
       <AnswerButton
       answers={answers}
       icon="/images/calculator.svg"
@@ -124,12 +128,12 @@ const SequenceAndOrderCard: React.FC<SequenceAndOrderCardProps> = ({ index, gozi
       //     />
       //   </div>
         }
-        {(answers[index].image || hasText ) ? '':
+        {(answers[index].image || answers[index].text !== null ) ? '':
         <AnswerButton
           answers={answers}
           icon="/images/edit.svg"
           color="bg-[#0066FF]"
-          onClick={()=>setHasText(true)}
+          onClick={()=>handleAddText(index)}
         />
         //  <div
         //   className={`
@@ -147,7 +151,7 @@ const SequenceAndOrderCard: React.FC<SequenceAndOrderCardProps> = ({ index, gozi
         //   />
         // </div>
         }
-        {(answers[index].image || hasText ) ? '': 
+        {(answers[index].image || answers[index].text !== null ) ? '': 
       
         <div
           className={`

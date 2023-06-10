@@ -1,4 +1,7 @@
 
+import Descriptive from "@/components/levelTypes/descriptive/Descriptive";
+import DialogBox from "@/components/levelTypes/dialogBox/DialogBox";
+import DragAndDrop from "@/components/levelTypes/dragAndDrop/DragAndDrop";
 import ChaharGozine from "@/components/levelTypes/fourChoice/ChaharGozine";
 import Pairing from "@/components/levelTypes/pairing/Pairing";
 import SequenceAndOrder from "@/components/levelTypes/sequenceAndOrder/SequenceAndOrder";
@@ -27,7 +30,14 @@ export default function Home() {
           ) : currentLevel.type == "توالی و ترتیب" ? (
             <SequenceAndOrder />
           ) : currentLevel.type == "جفت سازی" ? (
-            <Pairing /> ): 
+            <Pairing /> )
+            : currentLevel.type == "تشریحی" ?(
+              <Descriptive />
+            ): currentLevel.type == "کشیدن و رها کردن" ?(
+              <DragAndDrop />
+            ): currentLevel.type == "دیالوگ باکس" ?(
+              <DialogBox/>
+            ):
             <div></div>
           }
           {/* <GameBuilderBoard/> */}

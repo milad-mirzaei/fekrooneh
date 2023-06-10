@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import Modal from "../Modal";
 
-
 import GameBgAudioCard from "../GameBgAudioCard";
 import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
 import {
@@ -15,12 +14,12 @@ import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
 import { AiFillDelete } from "react-icons/ai";
 import Image from "next/image";
-import AudioModalHook from "../../hooks/useAudioModal";
+import useAudioModal from "../../hooks/useAudioModal";
 import useGameVoices from "../../hooks/useGameVoices";
 import useGameMusics from "../../hooks/useGameMusics";
 
 const AudioModal = () => {
-  const audioModal = AudioModalHook();
+  const audioModal = useAudioModal();
   const useVoices = useGameVoices();
   const voiceRef = useRef<HTMLAudioElement>(null);
   const voicePishRef = useRef<HTMLAudioElement>(null);
@@ -88,7 +87,6 @@ const AudioModal = () => {
             image={item.image}
             name={item.title}
             index={index}
-            key={index}
           />
         ))}
       </div>
@@ -129,7 +127,7 @@ const AudioModal = () => {
           />
         )}
         {useVoices.voices.map((item, index) => (
-          <div key={index}>
+          <div>
             <div className="flex flex-row items-center gap-2 justify-center">
               <div
                 className="w-[50px] h-[50px] group bg-neutral-200 rounded-[20px] cursor-pointer flex items-center justify-center"
@@ -218,7 +216,7 @@ const AudioModal = () => {
         <div className=" w-[300px] flex justify-center ">
 
         <div className="relative w-[200px] h-[200px] group bg-purple-500 rounded-[30px] flex justify-center items-center">
-        <Image
+        <img
             src={`/${useMusics.musics[selectedMusicIndex].image}`}
             alt="image"
             className="w-[192px] h-[192px] rounded-[30px]"

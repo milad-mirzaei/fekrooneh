@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react";
 
 interface ModalProps {
-    isOpen?: boolean;
-    body?: React.ReactElement;
-    onClose:()=>void;
+  isOpen?: boolean;
+  body?: React.ReactElement;
+  onClose: () => void;
 }
 
-const Modal:React.FC<ModalProps> = ({isOpen,body,onClose}) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, body, onClose }) => {
   if (!isOpen) {
     return null;
   }
-  
+
   return (
     <div
       className={`
@@ -29,10 +29,14 @@ const Modal:React.FC<ModalProps> = ({isOpen,body,onClose}) => {
           bg-neutral-100
           transition-all
             duration-300
-            ${isOpen ? 'scale-100 opacity-100':' scale-0 opacity-0  bg-transparent -translate-x-[130px] -translate-y-[410px]'}
+            ${
+              isOpen
+                ? "scale-100 opacity-100"
+                : " scale-0 opacity-0  bg-transparent -translate-x-[130px] -translate-y-[410px]"
+            }
         `}
-        dir="rtl"
-        onClick={onClose}
+      dir="rtl"
+      onClick={onClose}
     >
       <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto ">
         <div
@@ -51,13 +55,13 @@ const Modal:React.FC<ModalProps> = ({isOpen,body,onClose}) => {
             focus:outline-none
             
             `}
-            onClick={(e)=>e.stopPropagation()}
-        > 
-        {body}
-        </div>
+          onClick={(e) => e.stopPropagation()}
+        >
+          {body}
         </div>
       </div>
+    </div>
   );
-}
+};
 
-export default Modal
+export default Modal;

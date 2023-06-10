@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Gozine } from "../../../hooks/useLevels";
-import AudioModalHook  from "../../../hooks/useAudioModal";
-import AddImageModalHook from "../../../hooks/useAddImageModal";
-import LevelsHook from "../../../hooks/useLevels";
-import Image from 'next/image';
+import useAudioModal from "../../../hooks/useAudioModal";
+import useAddImageModal from "../../../hooks/useAddImageModal";
+import useLevels from "../../../hooks/useLevels";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
-import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from "uuid";
 import SequenceAndOrderCard from "./SequenceAndOrderCard";
 
 const SequenceAndOrder = () => {
-  const audioModal = AudioModalHook();
-  const addImageModal = AddImageModalHook();
+  const audioModal = useAudioModal();
+  const addImageModal = useAddImageModal();
 
-  const levels = LevelsHook();
+  const levels = useLevels();
 
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(
@@ -122,7 +121,7 @@ const SequenceAndOrder = () => {
       >
         <div className="flex items-center justify-start gap-2">
           <div className="w-[32px] h-[32px] mr-5 rounded-full bg-[#FFB72A] border-[1px] border-black flex items-center justify-center">
-            <Image src="images/rahnamaIcon.svg" alt="rahnama" />
+            <img src="images/rahnamaIcon.svg" alt="rahnama" />
           </div>
           <p className="text-white font-bold text-[16px] md:text-[11px]">
             برای فعال شدن تمام قابلیت های بازیسازی میتونی اشتراک پریمیوم بگیری و
@@ -133,7 +132,7 @@ const SequenceAndOrder = () => {
           <p className="text-white font-bold text-[16px] md:text-[11px]">
             خرید اشتراک پریمیوم
           </p>
-          <Image src="images/arrowcircleup2.svg" alt="arrow" />
+          <img src="images/arrowcircleup2.svg" alt="arrow" />
         </div>
       </div>
       <div className="md:h-[175px] h-[257px] flex flex-row justify-start items-end gap-5">
@@ -151,7 +150,7 @@ const SequenceAndOrder = () => {
             className=" w-[42px] h-[42px] rounded-full border-[1px] border-black flex items-center justify-center bg-[#DFECFF]"
             style={{ boxShadow: "4px 3px black" }}
           >
-            <Image src="images/editIcon.svg" alt="edit" />
+            <img src="images/editIcon.svg" alt="edit" />
           </div>
           <textarea
             disabled={false}
@@ -200,35 +199,35 @@ const SequenceAndOrder = () => {
                   className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#FFB72A] border-dashed border-[#ffffff] border-[2px] rounded-[15px]"
                   onClick={() => addImageModal.onOpen("levelImage",null,null)}
                 >
-                  <Image src="images/image.svg" alt="image" />
+                  <img src="images/image.svg" alt="image" />
                   {/* <div className="absolute w-[20px] h-[20px] flex items-center justify-center bg-white rounded-full border-[2px] -right-[10px] border-black">
-                  <Image src="images/+.svg" alt="plus" />
+                  <img src="images/+.svg" alt="plus" />
                 </div> */}
                 </div>
                 <div
                   className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#F6EDFF] border-dashed border-[#6B00E2] border-[2px] rounded-[15px]"
                   onClick={audioModal.onOpen}
                 >
-                  <Image src="images/voicecircle.svg" alt="voice" />
+                  <img src="images/voicecircle.svg" alt="voice" />
                   <div
                     className="absolute w-[23px] h-[23px] flex items-center justify-center bg-[#FFB72A] rounded-full border-[1px] -top-[17px] border-black"
                     style={{ boxShadow: "1px 1px black" }}
                   >
-                    <Image src="images/rahnamaIcon2.svg" alt="plus" />
+                    <img src="images/rahnamaIcon2.svg" alt="plus" />
                   </div>
                 </div>
                 <div className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#DDFFED] border-dashed border-[#28DE7C] border-[2px] rounded-[15px]">
-                  <Image src="images/videocircle.svg" alt="video" />
+                  <img src="images/videocircle.svg" alt="video" />
                   <div
                     className="absolute w-[23px] h-[23px] flex items-center justify-center bg-[#FFB72A] rounded-full border-[1px] -top-[17px] border-black"
                     style={{ boxShadow: "1px 1px black" }}
                   >
-                    <Image src="images/rahnamaIcon2.svg" alt="plus" />
+                    <img src="images/rahnamaIcon2.svg" alt="plus" />
                   </div>
                 </div>
               </div>
               <div className="flex items-center justify-center gap-1">
-                <Image src="images/info.svg" alt="info" />
+                <img src="images/info.svg" alt="info" />
                 <p className="text-[13px] font-semibold text-black opacity-50">
                   میتونی یک تصویر , صدا یا ویدیو اضافه کنی
                 </p>
@@ -237,7 +236,7 @@ const SequenceAndOrder = () => {
           ) : currentLevel.sequenceAndOrder.music == null &&
             currentLevel.sequenceAndOrder.video == null ? (
             <div className="md:h-[175px] md:w-[175px] flex justify-center items-center group/levelImage  relative">
-              <Image
+              <img
                 className="h-full"
                 src={currentLevel.sequenceAndOrder.image["data_url"]}
                 alt=""
@@ -304,7 +303,7 @@ const SequenceAndOrder = () => {
               onClick={() =>
                 handleAddAnswer({
                   id: uuidv4(),
-                  text: "",
+                  text: null,
                   color: currentLevel.extraAnswers[0].color,
                   mask:currentLevel.extraAnswers[0].mask,
                   isSelected: false,
@@ -324,7 +323,6 @@ const SequenceAndOrder = () => {
         >
           {answers.map((ans, index) => (
             <div
-            key={ans.id}
               className={`transition-all duration-500 ${
                 answers.length == 5 && " md:w-[170px] md:h-[37px]"
               } 

@@ -3,7 +3,6 @@ import { AiOutlineClose } from "react-icons/ai";
 import Modal from "../Modal";
 import Input from "../Input";
 import useSettingsModal from "../../hooks/useSettingsModal";
-import Image from 'next/image';
 
 
 const SettingsModal = () => {
@@ -73,14 +72,14 @@ const SettingsModal = () => {
           <div className="w-[338px] h-[64px] flex items-center justify-between rounded-[34px] border-[1px] border-[#aaaaaa] cursor-pointer px-8">
             <p className="font-extrabold text-[17px]">علمی تخیلی</p>
             <div className="w-[31px] h-[24px] bg-[#D7D7D7] rounded-[14px] flex items-center justify-center">
-              <Image src="images/VectorDown.svg" alt="vector" />
+              <img src="images/VectorDown.svg" alt="vector" />
             </div>
           </div>
           <p className="text-[#aaaaaa] text-[17px] pr-8">آهنگ پس زمینه بازی</p>
           <div className="w-[338px] h-[64px] flex items-center justify-between rounded-[34px] border-[1px] border-[#aaaaaa] cursor-pointer px-8">
             <p className="font-extrabold text-[17px]">فکرونه بازی</p>
             <div className="w-[31px] h-[24px] bg-[#D7D7D7] rounded-[14px] flex items-center justify-center">
-              <Image src="images/VectorDown.svg" alt="vector" />
+              <img src="images/VectorDown.svg" alt="vector" />
             </div>
           </div>
         </div>
@@ -135,8 +134,8 @@ const SettingsModal = () => {
           </div>
           <div className="flex gap-2 flex-wrap">
             {tagList.map((t, i) => (
-              <div key={t} className="h-[47px] p-2 px-4 flex items-center justify-start bg-[#D7D7D7] rounded-[25px] gap-1 ">
-                <Image
+              <div className="h-[47px] p-2 px-4 flex items-center justify-start bg-[#D7D7D7] rounded-[25px] gap-1 ">
+                <img
                   className="cursor-pointer"
                   src="images/closecircle.svg"
                   alt="close"

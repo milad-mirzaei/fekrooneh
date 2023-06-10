@@ -1,16 +1,13 @@
-import React from "react";
 
-import GozineCard from "./GozineCard";
-import useAudioModal from "../../../hooks/useAudioModal";
-import useAddImageModal from "../../../hooks/useAddImageModal";
-import useLevels from "../../../hooks/useLevels";
-import  { Gozine } from "../../../hooks/useLevels";
-import { v4 as uuidv4 } from "uuid";
+import React, { useRef } from "react";
+import GozineCard from "../fourChoice/GozineCard";
+import useAudioModal from "@/hooks/useAudioModal";
+import useAddImageModal from "@/hooks/useAddImageModal";
+import useLevels from "@/hooks/useLevels";
 
-const chaharGozine = () => {
+const Descriptive = () => {
   const audioModal = useAudioModal();
   const addImageModal = useAddImageModal();
-
 
   const levels = useLevels();
 
@@ -19,65 +16,54 @@ const chaharGozine = () => {
     (level) => level.isSelected == true
   );
   const currentLevel = levels.levels[selectedLevelIndex];
-  const question = currentLevel.fourChoice.question;
-
-  const answers = currentLevel.fourChoice.answers;
-
-  // const chaharGozineList = useChaharGozineList();
-  // const gozineList = chaharGozineList.gozineList;
-  // const selectedIndex = gozineList.findIndex(
-  //   (gozine) => gozine.isSelected == true
-  // );
+  const question = currentLevel.descriptive.question;
+  const image = currentLevel?.descriptive?.image;
+  const music = currentLevel?.descriptive?.music;
+  const video = currentLevel?.descriptive?.video;
+  const mainAnswer = currentLevel.descriptive.mainAnswer;
+  const otherAnswers = currentLevel.descriptive.otherAnswers;
 
   const handleChangeQuestion = (quest: string) => {
     const newLevel = currentLevel;
-    newLevel.fourChoice.question = quest;
+    newLevel.descriptive.question = quest;
     levelsList.splice(selectedLevelIndex, 1, newLevel);
     levels.onChangeLevel(levelsList);
   };
 
   const handleLevelImageDelete = () => {
     const newLevel = currentLevel;
-    newLevel.fourChoice.image = null;
+    newLevel.descriptive.image = null;
     levelsList.splice(selectedLevelIndex, 1, newLevel);
     levels.onChangeLevel(levelsList);
   };
 
-  const handleIsMultiSelect = () => {
+  const handleChangeMainAnswer = (mainAns: string) => {
     const newLevel = currentLevel;
-    newLevel.fourChoice.isMultipleChoice = newLevel.fourChoice?.isMultipleChoice
-      ? false
-      : true;
-    newLevel.type = newLevel.fourChoice.isMultipleChoice?'چند گزینه ای':'چهار گزینه ای';
+    newLevel.descriptive.mainAnswer = mainAns;
     levelsList.splice(selectedLevelIndex, 1, newLevel);
     levels.onChangeLevel(levelsList);
   };
 
-  // const selectHandle = (index: number) => {
-  //   const newList = gozineList;
-  //   newList[selectedIndex].isSelected = false;
-  //   newList[index].isSelected = true;
-  //   chaharGozineList.onChangeGozine(newList);
-  // };
-
-  const handleAddAnswer = (answer: Gozine) => {
+  const handleChangeOtherAnswers = (ans: string, ansIndex: number) => {
     const newLevel = currentLevel;
-    newLevel.fourChoice.answers = [...newLevel.fourChoice.answers, answer];
-    newLevel.extraAnswers.splice(0,1);
+    newLevel.descriptive.otherAnswers[ansIndex] = ans;
     levelsList.splice(selectedLevelIndex, 1, newLevel);
     levels.onChangeLevel(levelsList);
   };
 
- 
+  const handleAddAnswer = () => {
+    const newLevel = currentLevel;
+    newLevel.descriptive.otherAnswers.push("");
+    levelsList.splice(selectedLevelIndex, 1, newLevel);
+    levels.onChangeLevel(levelsList);
+  };
 
-  const colors = [
-    "bg-[#ffb72a]",
-    "bg-[#7900FF]",
-    "bg-[#B2FFD6]",
-    "bg-[#FFDDD1]",
-    "bg-[#FE4E13]",
-    "bg-[#6BD3F1]",
-  ];
+  const handleDeleteAnswer = (ansIndex:number)=>{
+    const newLevel = currentLevel;
+    delete newLevel.descriptive.otherAnswers[ansIndex];
+    levelsList.splice(selectedLevelIndex, 1, newLevel);
+    levels.onChangeLevel(levelsList);
+  }
 
 
 
@@ -129,28 +115,28 @@ const chaharGozine = () => {
             placeholder={`سوالت رو اینجا تایپ کن عزیز من \n و از بقیه بپرس تا بهت جواب بدن تایید کنی \n تا سه خط میتونی سوال بنویسی `}
             rows={3}
             className={`
-            textarea
-            w-full
-            p-2 
-            pr-8
-            text-lg 
-            font-bold
-            bg-white 
-            outline-none
-            text-black
-            placeholder:text-black
-            placeholder:text-[24px]
-            md:placeholder:text-[16px]
-            placeholder:font-extrabold
-            transition
-            border-none
-            focus:border-none
-            focus:border-transparent
-            focus:ring-0
-            disabled:bg-neutral-900
-            disabled:opacity-70
-            disabled:cursor-not-allowed
-          `}
+          textarea
+          w-full
+          p-2 
+          pr-8
+          text-lg 
+          font-bold
+          bg-white 
+          outline-none
+          text-black
+          placeholder:text-black
+          placeholder:text-[24px]
+          md:placeholder:text-[16px]
+          placeholder:font-extrabold
+          transition
+          border-none
+          focus:border-none
+          focus:border-transparent
+          focus:ring-0
+          disabled:bg-neutral-900
+          disabled:opacity-70
+          disabled:cursor-not-allowed
+        `}
             style={{ resize: "none" }}
           />
         </div>
@@ -158,19 +144,17 @@ const chaharGozine = () => {
           className="md:w-[300px] md:h-[175px] w-[347px] h-[263px] hover:scale-105 transition-all duration-500 border-dashed border-[2px] border-black rounded-[14px] bg-white flex flex-col items-center justify-center gap-4"
           style={{ boxShadow: "4px 3px black" }}
         >
-          {currentLevel?.fourChoice?.image == null &&
-          currentLevel?.fourChoice?.music == null &&
-          currentLevel?.fourChoice?.video == null ? (
+          {image == null && music == null && video == null ? (
             <div className="flex flex-col items-center justify-center gap-3">
               <div className="flex gap-2">
                 <div
                   className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#FFB72A] border-dashed border-[#ffffff] border-[2px] rounded-[15px]"
-                  onClick={() => addImageModal.onOpen("levelImage",null,null)}
+                  onClick={() => addImageModal.onOpen("levelImage", null, null)}
                 >
                   <img src="images/image.svg" alt="image" />
                   {/* <div className="absolute w-[20px] h-[20px] flex items-center justify-center bg-white rounded-full border-[2px] -right-[10px] border-black">
-                  <img src="images/+.svg" alt="plus" />
-                </div> */}
+                <img src="images/+.svg" alt="plus" />
+              </div> */}
                 </div>
                 <div
                   className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#F6EDFF] border-dashed border-[#6B00E2] border-[2px] rounded-[15px]"
@@ -201,83 +185,113 @@ const chaharGozine = () => {
                 </p>
               </div>
             </div>
-          ) : currentLevel.fourChoice.music == null &&
-            currentLevel.fourChoice.video == null ? (
+          ) : music == null && video == null ? (
             <div className="md:h-[175px] md:w-[175px] flex justify-center items-center group/levelImage  relative">
-              
-              <img
-                className="h-full"
-                src={currentLevel.fourChoice.image["data_url"]}
-                alt=""
-              />
+              <img className="h-full" src={image["data_url"]} alt="" />
               <div className="absolute w-[300px] h-[175px] rounded-[20px] bg-neutral-300 bg-opacity-40  hidden group-hover/levelImage:flex items-center  gap-2 justify-center transition-all duration-500">
-                
-                <button className="  rounded-[15px] px-5 py-2 bg-white border-[3px] border-white group/remove border-dashed hover:border-purple-500 transition-all duration-500" onClick={handleLevelImageDelete}>
+                <button
+                  className="  rounded-[15px] px-5 py-2 bg-white border-[3px] border-white group/remove border-dashed hover:border-purple-500 transition-all duration-500"
+                  onClick={handleLevelImageDelete}
+                >
                   <p className="text-[20px] text-gray-400 group-hover/remove:text-purple-500 transition-all duration-500">
                     پاک کردن
                   </p>
                 </button>
               </div>
             </div>
-          ) : currentLevel.fourChoice.image == null &&
-            currentLevel.fourChoice.video == null ? (
+          ) : image == null && video == null ? (
             <p>موزیک</p>
           ) : (
             <p>ویدیو</p>
           )}
         </div>
       </div>
-      <div className="flex justify-between  w-full gap-5">
-        <div className="flex flex-auto justify-center items-center gap-3 ">
-          {answers.map((gozine, index) => (
-            <GozineCard
-              index={index}
-              gozine={gozine}
-            />
-          ))}
+      <div className="w-full h-[300px]  flex items-center justify-center gap-3 pt-5">
+        <div className="flex flex-col w-[200px] gap-3 h-full pt-10">
+          <p className="text-[20px] font-['Shabnam'] font-extrabold">
+            پاسخ درست <br /> به همراه پاسخ های مورد
+            <br /> قبول رو تایپ کن
+          </p>
+          <p className="text-[14px] font-['Shabnam'] ">
+            وارد کردن پاسخ اصلی به طور صحیح الزامی است.
+          </p>
         </div>
-        {currentLevel.fourChoice.answers.length < 6 && (
-          <div className="flex flex-col justify-center">
+        <div className="flex flex-col w-[614px] h-full gap-3">
+          <div
+            className="w-[557px] h-[50px] rounded-[12px] border-[1px] border-black bg-[#30D67C] px-[15px] mr-[40px] flex items-center justify-start gap-2 "
+            style={{ boxShadow: "2px 2px black" }}
+          >
+            <p className="text-white text-[13px]">پاسخ اصلی :</p>
+            <input
+              type="text"
+              value={mainAnswer}
+              id="mainAnswerInput"
+              onChange={(e) => handleChangeMainAnswer(e.target.value)}
+              className="flex-auto bg-transparent border-none focus:border-none focus:ring-0 text-white font-bold text-[18px]"
+            />
             <div
-              className="cursor-pointer w-[38px] h-[70px] hover:scale-110 transition-all duration-300 rounded-[29px] bg-[#7900FF] border-[1px] border-black flex justify-center items-center "
-              style={{ boxShadow: "4px 3px black" }}
-              onClick={() =>
-                handleAddAnswer({
-                  id: uuidv4(),
-                  text: null,
-                  color: currentLevel.extraAnswers[0].color,
-                  mask:currentLevel.extraAnswers[0].mask,
-                  isSelected: false,
-                })
-              }
+              className="w-[32px] h-[32px] rounded-full border-[1px] border-black bg-[#0066FF] flex items-center justify-center cursor-pointer"
+              style={{ boxShadow: "2px 2px black" }}
+              onClick={()=>{document.getElementById('mainAnswerInput')?.focus()}}
             >
-              <p className="text-white text-[33px] font-bold">+</p>
+              <img src="images/edit.svg" alt="" />
             </div>
           </div>
-        )}
-      </div>
-      <div
-        className="flex justify-center items-center w-[250px] h-[44px] hover:scale-105 transition-all duration-500 gap-5 bg-white rounded-[38px] border-[1px] border-black  "
-        style={{ boxShadow: "4px 3px black" }}
-      >
-        <div
-          className={`relative flex justify-end items-center w-[50px] h-[25px]  ${
-            currentLevel?.fourChoice?.isMultipleChoice ? " bg-[#F03944] " : ""
-          } rounded-[31px] border-[1px] border-black p-[6px] transition-all duration-500 cursor-pointer `}
-          onClick={handleIsMultiSelect}
-        >
+          <div className="flex flex-col h-[300px] w-[625px] ml-[15px] pl-[15px] overflow-auto gap-2 ">
+            {otherAnswers.map((ans, index) => (
+              <div className="flex items-center justify-start pr-[15px] gap-4">
+                <p>یا</p>
+                <div
+                  className={`w-[557px] h-[46px] flex items-center justify-start rounded-[12px] border-[1px] border-black bg-white  px-[15px] ${
+                    index == 0 && "border-dashed border-[2px]"
+                  }`}
+                  style={{ boxShadow: index == 0 ? "" : "2px 2px black" }}
+                >
+                  <p className="text-black opacity-50 text-[13px]">
+                    شبیه اینم بود قبوله :
+                  </p>
+                  <input
+                    type="text"
+                    id={`input ${index}`}
+                    value={otherAnswers[index]}
+                    onChange={(e) =>
+                      handleChangeOtherAnswers(e.target.value, index)
+                    }
+                    className="flex-auto bg-transparent border-none focus:border-none focus:ring-0 text-black font-bold text-[18px]"
+                  />
+                  <div className="flex gap-2">
+                    <div
+                      className="w-[32px] h-[32px] rounded-full border-[1px] border-black bg-[#0066FF] flex items-center justify-center cursor-pointer"
+                      style={{ boxShadow: "2px 2px black" }}
+                      onClick={()=>{document.getElementById(`input ${index}`)?.focus()}}
+                    >
+                      <img src="images/edit.svg" alt="" />
+                    </div>
+                    {index !== 0 &&
+                    <div
+                    className="w-[32px] h-[32px] rounded-full border-[1px] border-black bg-[#F03944] flex items-center justify-center"
+                    style={{ boxShadow: "2px 2px black" }}
+                    onClick={()=>handleDeleteAnswer(index)}
+                  >
+                    <img src="images/closecircle2.svg" alt="" />
+                  </div>
+                    }
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
           <div
-            className={`absolute ${
-              currentLevel?.fourChoice?.isMultipleChoice
-                ? "translate-x-[20px] bg-white "
-                : ""
-            }  w-[15px] h-[15px] border-[1px] border-black  bg-[#F03944] rounded-full transition-all duration-500`}
-          ></div>
+            className="w-[557px] h-[75px] rounded-[12px] border-[1px] border-black bg-[#0066FF] px-[15px] mr-[40px] flex items-center justify-center gap-2 cursor-pointer "
+            style={{ boxShadow: "2px 2px black" }}
+            onClick={handleAddAnswer}
+          >
+            <p className="text-white font-bold">+ افزودن پاسخ درست</p>
+          </div>
         </div>
-        <p className="text-[17px] font-bold">حالت چند گزینه ای</p>
       </div>
     </div>
   );
 };
 
-export default chaharGozine;
+export default Descriptive;

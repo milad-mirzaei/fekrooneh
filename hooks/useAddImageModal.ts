@@ -12,7 +12,7 @@ interface AddImageModalStore{
     onClose:()=>void;
 }
 
-const AddImageModalHook = create<AddImageModalStore>((set)=>({
+const useAddImageModal = create<AddImageModalStore>((set)=>({
     isOpen:false,
     type:'levelImage',
     itemIndex:null,
@@ -21,4 +21,4 @@ const AddImageModalHook = create<AddImageModalStore>((set)=>({
     onClose:()=>set({isOpen:false})
 }))
 
-export default AddImageModalHook;
+export default useAddImageModal;

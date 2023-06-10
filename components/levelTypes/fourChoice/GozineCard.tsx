@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import  { Gozine } from "../../../hooks/useLevels";
-import LevelsHook from "../../../hooks/useLevels";
+import useLevels from "../../../hooks/useLevels";
 import _ from "lodash";
-import AddImageModalHook from "../../../hooks/useAddImageModal";
+import useAddImageModal from "../../../hooks/useAddImageModal";
 import AnswerText from "../../AnswerText";
 import AnswerImage from "../../AnswerImage";
 
@@ -13,14 +13,9 @@ interface GozineCardProps {
 }
 
 const GozineCard: React.FC<GozineCardProps> = ({ index, gozine }) => {
-  const addImageModal = AddImageModalHook();
+  const addImageModal = useAddImageModal();
 
-
-  const [hasText, setHasText] = useState(false);
-
-
-
-  const levels = LevelsHook();
+  const levels = useLevels();
   const levelsList = levels.levels;
   const selectedLevelIndex = levels.levels.findIndex(
     (level) => level.isSelected == true
@@ -63,29 +58,34 @@ const GozineCard: React.FC<GozineCardProps> = ({ index, gozine }) => {
     } else {
       deleteAnswer(gozine);
     }
-    setHasText(false);
   };
 
   const handleDeleteAnswerImage=()=>{
-      const newList = answers;
-      newList[index].image=null;
-      levelsList[selectedLevelIndex].fourChoice.answers=newList;
+      const newLevel = currentLevel;
+      newLevel.fourChoice.answers[index].image=null;
+      levelsList.splice(selectedLevelIndex, 1, newLevel);
       levels.onChangeLevel(levelsList);
   }
 
   const handleChangeAnswerText = (text: string) => {
     const newLevel = currentLevel;
-    newLevel.fourChoice.answers[index].text = text;
-    levelsList.splice(selectedLevelIndex, 1, newLevel);
-    levels.onChangeLevel(levelsList);
+      newLevel.fourChoice.answers[index].text=text;
+      levelsList.splice(selectedLevelIndex, 1, newLevel);
+      levels.onChangeLevel(levelsList);
   };
 
   const handleDeletAnswerText = ()=>{
     const newLevel = currentLevel;
-    setHasText(false);
-    newLevel.fourChoice.answers[index].text='';
+    newLevel.fourChoice.answers[index].text=null;
     levelsList.splice(selectedLevelIndex, 1, newLevel);
     levels.onChangeLevel(levelsList);
+  }
+
+  const handleAddText = (index:number)=>{
+    const newLevel = currentLevel;
+      newLevel.fourChoice.answers[index].text='';
+      levelsList.splice(selectedLevelIndex, 1, newLevel);
+      levels.onChangeLevel(levelsList);
   }
 
   return (
@@ -101,9 +101,9 @@ const GozineCard: React.FC<GozineCardProps> = ({ index, gozine }) => {
      }  border-[3px] border-black `}
       style={{ boxShadow: "4px 3px black" }}
     >
-      <Image
+      <img
         className="absolute top-[50px] right-[5px]"
-        src={gozine.mask!}
+        src={gozine.mask}
         alt="mask"
       />
       <div
@@ -125,7 +125,7 @@ const GozineCard: React.FC<GozineCardProps> = ({ index, gozine }) => {
         onDelete={handleDeleteAnswerImage}
         image={answers[index].image["data_url"]}
         />
-      ):hasText ?(
+      ):answers[index].text !== null ?(
         <AnswerText
         value={answers[index].text!}
         onChange={handleChangeAnswerText}
@@ -135,7 +135,7 @@ const GozineCard: React.FC<GozineCardProps> = ({ index, gozine }) => {
       ):null}
 
       <div className="absolute bottom-[24px] md:bottom-[17px] flex justify-center items-center gap-1">
-      {(answers[index].image || hasText ) ? '': <div
+      {(answers[index].image || answers[index].text !== null) ? '': <div
           className={`
             ${answers.length == 5 && "md:w-[27px] md:h-[27px]"}
             ${answers.length == 6 && "md:w-[27px] md:h-[27px]"}
@@ -149,13 +149,13 @@ const GozineCard: React.FC<GozineCardProps> = ({ index, gozine }) => {
             height={answers.length == 5 ? 15 : answers.length == 6 ? 13 : 20}
           />
         </div>}
-        {(answers[index].image || hasText ) ? '': <div
+        {(answers[index].image || answers[index].text !== null ) ? '': <div
           className={`
             ${answers.length == 5 && "md:w-[27px] md:h-[27px]"}
             ${answers.length == 6 && "md:w-[27px] md:h-[27px]"}
             cursor-pointer w-[30px] h-[30px] flex justify-center items-center rounded-full border-[2px] border-black bg-[#0066FF] `}
           style={{ boxShadow: "2px 2px black" }}
-          onClick={()=>setHasText(true)}
+          onClick={()=>handleAddText(index)}
         >
           <Image
             src="/images/edit.svg"
@@ -164,7 +164,7 @@ const GozineCard: React.FC<GozineCardProps> = ({ index, gozine }) => {
             height={answers.length == 5 ? 15 : answers.length == 6 ? 13 : 20}
           />
         </div>}
-        {(answers[index].image || hasText ) ? '': <div
+        {(answers[index].image || answers[index].text !== null ) ? '': <div
           className={`
             ${answers.length == 5 && "md:w-[27px] md:h-[27px]"}
             ${answers.length == 6 && "md:w-[27px] md:h-[27px]"}

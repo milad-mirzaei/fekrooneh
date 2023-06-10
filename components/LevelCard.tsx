@@ -1,6 +1,5 @@
 import React from "react";
-import LevelsHook, { Level } from "../hooks/useLevels";
-import Image from 'next/image';
+import useLevels, { Level } from "../hooks/useLevels";
 
 interface LevelCardProps {
   index: number;
@@ -8,7 +7,7 @@ interface LevelCardProps {
 }
 
 const LevelCard: React.FC<LevelCardProps> = ({ index, level }) => {
-  const levels = LevelsHook();
+  const levels = useLevels();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(
     (level) => level.isSelected == true
@@ -72,14 +71,14 @@ const LevelCard: React.FC<LevelCardProps> = ({ index, level }) => {
           </p>
         </div>
         <div className="flex gap-2 justify-end  mr-0 mt-1">
-          <Image
+          <img
             onClick={(event) =>{event.stopPropagation(); handleCopy(level)}}
             src={`${
               level.isSelected ? "images/copyWhite.svg" : "images/copy.svg"
             }`}
             alt="copy"
           />
-          <Image
+          <img
             onClick={(event) =>{event.stopPropagation(); handleDelete(level)}}
             src={`${
               level.isSelected
@@ -91,14 +90,14 @@ const LevelCard: React.FC<LevelCardProps> = ({ index, level }) => {
         </div>
       </div>
       <div className="absolute bottom-0 w-[202px] h-[117px] bg-[#F5F5F5] bg-levelCard border-[1px] border-black rounded-[20px] flex justify-center items-center">
-        <Image src={level.icon} alt="4gozine" />
+        <img src={level.icon} alt="4gozine" />
       </div>
       {level.rahnamaColor && level.rahnamaIcon && (
         <div
           className="absolute -right-5 bottom-14 flex items-center justify-center w-[34px] h-[34px] rounded-full bg-[#f03944] border-[2px] border-black"
           style={{ boxShadow: "3px 2px black" }}
         >
-          <Image src="images/infocircle.svg" alt="info" />
+          <img src="images/infocircle.svg" alt="info" />
         </div>
       )}
     </div>

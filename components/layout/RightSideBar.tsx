@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import RightSideBarSelect from "../RightSideBarSelect";
-import LevelsHook, { Level } from "../../hooks/useLevels";
-import Image from 'next/image';
+import useLevels, { Level } from "../../hooks/useLevels";
 
 
 const RigtSideBar = () => {
  
-  const levels = LevelsHook();
+  const levels = useLevels();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex((level)=>level.isSelected == true);
   const currentLevel = levelsList[selectedLevelIndex];
@@ -120,12 +119,12 @@ const RigtSideBar = () => {
       /> }
       {currentLevel.type === 'جفت سازی' ? null : <div>
       <div className="flex w-full items-center justify-start pr-5 gap-2">
-        <Image src="images/magic-wand.svg" alt="magic" />
+        <img src="images/magic-wand.svg" alt="magic" />
         <p className="font-bold">افکت تصویر</p>
       </div>
       <div className="grid grid-cols-2 gap-2">
         {effects.map((item, index) => (
-          <div key={item} onClick={()=>{setSelectedEffect(index)}} className="flex flex-col items-center gap-1">
+          <div onClick={()=>{setSelectedEffect(index)}} className="flex flex-col items-center gap-1">
             <div className={`w-[111px] h-[67px] border-[.8px] rounded-[10px]  transition-all duration-400 ${selectedEffect == index && 'border-[#0066ff] border-[1.6px]'} `}></div>
             <p>{item}</p>
           </div>
@@ -135,7 +134,7 @@ const RigtSideBar = () => {
       </div>
       <div className=" md:w-[225px] md:h-[45px] w-[289px] max-w-[289px] hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-3  h-[53px] rounded-full border-[1px] border-black bg-[#ffb72a] top-2 " style={{ boxShadow: "2px 3px black" }}>
             <div className="w-[33px] h-[33px] flex items-center justify-center rounded-full border-black border-[1px]" style={{ boxShadow: "2px 2px black" }}>
-                <Image src="images/rahnamaIcon.svg" alt="rahnama" width={18} />
+                <img src="images/rahnamaIcon.svg" alt="rahnama" width={18} />
             </div>
                 <p className="text-white text-[14px] font-bold">افزودن راهنما به این مرحله</p>
       </div>

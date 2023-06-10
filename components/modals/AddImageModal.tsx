@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../Modal";
-import LevelsHook from "../../hooks/useLevels";
+import useLevels from "../../hooks/useLevels";
 import ImageUploading from "react-images-uploading";
-import AddImageModalHook from "../../hooks/useAddImageModal";
-import Image from 'next/image';
+import useAddImageModal from "../../hooks/useAddImageModal";
 
 
 
 
 const AddImageModal = () => {
-  const addImageModal = AddImageModalHook();
+  const addImageModal = useAddImageModal();
   const imageModalType = addImageModal.type;
   const imageModalItemIndex= addImageModal.itemIndex;
   const imageModalInnerItemIndex= addImageModal.innerItemIndex;
@@ -23,7 +22,7 @@ const AddImageModal = () => {
     setImages(imageList);
   };
 
-  const levels=LevelsHook();
+  const levels=useLevels();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex((level)=>level.isSelected == true);
   const currentLevel = levelsList[selectedLevelIndex];
@@ -32,7 +31,10 @@ const AddImageModal = () => {
     const newLevel = currentLevel;
     newLevel.type === 'درست و غلط' ? newLevel.trueFalse.image = images[0]:
     newLevel.type === 'چهار گزینه ای' || newLevel.type === 'چند گزینه ای' ? newLevel.fourChoice.image=images[0]:
-    newLevel.type === 'توالی و ترتیب' ? newLevel.sequenceAndOrder.image=images[0]:null;
+    newLevel.type === 'توالی و ترتیب' ? newLevel.sequenceAndOrder.image=images[0]:
+    newLevel.type === 'تشریحی' ? newLevel.descriptive.image=images[0]:
+    newLevel.type === 'کشیدن و رها کردن' ? newLevel.dragAndDrop.image=images[0]:
+    null;
     levelsList.splice(selectedLevelIndex,1,newLevel);
     levels.onChangeLevel(levelsList);
     setImages([]);
@@ -112,7 +114,7 @@ const AddImageModal = () => {
                     key={index}
                     className="relative flex items-center justify-center w-[400px] h-[400px]  rounded-[40px] overflow-hidden"
                   >
-                    <Image
+                    <img
                       className=" h-[400px] w-[400px] object-fill "
                       src={image["data_url"]}
                       alt=""

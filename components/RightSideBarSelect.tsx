@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
-import LevelsHook from "../hooks/useLevels";
-import Image from 'next/image';
-
+import useLevels from "../hooks/useLevels";
 import {
   eightXtwo,
   fiveXtwo,
@@ -28,7 +26,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
   choices,
   handleOpen,
 }) => {
-  const levels = LevelsHook();
+  const levels = useLevels();
   const levelsList = levels.levels;
   const selectedLevelIndex = levelsList.findIndex(
     (level) => level.isSelected == true
@@ -72,17 +70,17 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
     const newLevel = currentLevel;
     newLevel.pairing.arrangeModel = arngModel;
     arngModel == "2 دسته 2 تایی"
-      ? (newLevel.pairing.pairingItems = twoXtow)
+      ? (newLevel.pairing.pairingItems =JSON.parse(JSON.stringify(twoXtow)) )
       : arngModel == "3 دسته 2 تایی"
-      ? (newLevel.pairing.pairingItems = threeXtwo)
+      ? (newLevel.pairing.pairingItems =JSON.parse(JSON.stringify(threeXtwo)) )
       : arngModel == "4 دسته 2 تایی"
-      ? (newLevel.pairing.pairingItems = fourXtwo)
+      ? (newLevel.pairing.pairingItems =JSON.parse(JSON.stringify(fourXtwo)) )
       : arngModel == "5 دسته 2 تایی"
-      ? (newLevel.pairing.pairingItems = fiveXtwo)
+      ? (newLevel.pairing.pairingItems =JSON.parse(JSON.stringify(fiveXtwo)) )
       : arngModel == "6 دسته 2 تایی"
-      ? (newLevel.pairing.pairingItems = sixXtwo)
+      ? (newLevel.pairing.pairingItems =JSON.parse(JSON.stringify(sixXtwo)) )
       : arngModel == "8 دسته 2 تایی"
-      ? (newLevel.pairing.pairingItems = eightXtwo)
+      ? (newLevel.pairing.pairingItems =JSON.parse(JSON.stringify(eightXtwo)) )
       : null;
     levelsList.splice(selectedLevelIndex, 1, newLevel);
     levels.onChangeLevel(levelsList);
@@ -112,7 +110,6 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
     handleOpen();
   };
 
-  console.log(currentLevel.pairing.arrangeModel);
 
   return (
     <div
@@ -120,7 +117,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
       className="flex flex-col justify-start items-start w-full gap-2  transition-all duration-300 "
     >
       <div className="flex justify-start items-center gap-2 pr-5 transition-all duration-300">
-        <Image src={titleIcon} alt="gamepad" />
+        <img src={titleIcon} alt="gamepad" />
         <p className="text-[13px] font-semibold">{title}</p>
       </div>
       <div
@@ -135,7 +132,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
               {selectedIcon && (
                 <div className="relative w-[52px] h-[34px] ">
                   <div className="absolute w-[34px] h-[34px] rounded-full mr-4  bg-[#eaeefb]"></div>
-                  <Image
+                  <img
                     className="absolute -left-2"
                     src={selectedIcon}
                     alt="4gozine"
@@ -157,7 +154,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
               </p>
             </div>
             <div className=" w-[30px] h-[22px] ml-4 mt-1 rounded-[14px] bg-[#ffffff] border-black border-[1px] flex items-center justify-center">
-              <Image
+              <img
                 className={`${
                   isOpen && "rotate-180"
                 } transition-all duration-300`}
@@ -171,13 +168,17 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
             {isOpen &&
               choices.map((item, index) => {
                 return (
-                  <div key={item}
-                    className={` w-full md:h-[45px] py-3 rounded-[30px] border-[1px] border-black px-4  flex items-center justify-start hover:bg-black hover:text-white transition-all duration-300 ${
-                     ( parseInt(item) == currentLevel.zaman ||
-                        parseInt(item) == currentLevel.emtiaz ||
+                  <div
+                    className={` w-full md:h-[45px] py-3 rounded-[30px] border-[1px] border-black px-4  flex items-center justify-start hover:bg-black hover:text-white transition-all duration-300 
+                    ${parseInt(item) == currentLevel.zaman &&"bg-neutral-500 text-white"}
+                    ${parseInt(item) == currentLevel.emtiaz &&"bg-neutral-500 text-white"}
+                    ${item == currentLevel.sakhti &&"bg-neutral-500 text-white"}
+                    ${item == currentLevel.type &&"bg-neutral-500 text-white"}
+                    ${item == currentLevel.pairing.arrangeModel &&"bg-neutral-500 text-white"}
+                         ||
                         item == currentLevel.sakhti ||
                         item == currentLevel.type ||
-                        item == currentLevel.pairing.arrangeModel) &&
+                        item == currentLevel.pairing.arrangeModel &&
                       "bg-neutral-500 text-white"
                     } `}
                     onClick={() => {

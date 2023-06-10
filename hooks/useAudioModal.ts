@@ -7,10 +7,10 @@ interface AudioModalStore{
     onClose:()=>void;
 }
 
-const AudioModalHook = create<AudioModalStore>((set)=>({
+const useAudioModal = create<AudioModalStore>((set)=>({
     isOpen:false,
     onOpen:()=>set({isOpen:true}),
     onClose:()=>set({isOpen:false})
 }))
 
-export default AudioModalHook;
+export default useAudioModal;

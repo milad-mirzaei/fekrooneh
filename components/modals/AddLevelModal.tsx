@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
-import LevelsHook from "../../hooks/useLevels";
+import useLevels from "../../hooks/useLevels";
 import useAddLevelModal from "../../hooks/useAddLevelModal";
 import useGameModels from "../../hooks/useGameModels";
 import { v4 as uuidv4 } from "uuid";
@@ -8,7 +8,7 @@ import { fourXtwo } from "../../constants/defaultPairingItems";
 import { defaultItems, extraAnswers } from "../../constants/defaultFourChoiceItems";
 
 const AddLevelModal = () => {
-  const levels = LevelsHook();
+  const levels = useLevels();
 
   const addLevelModal = useAddLevelModal();
   const { models } = useGameModels();
@@ -18,7 +18,7 @@ const AddLevelModal = () => {
     <div className="flex justify-start items-start p-10 gap-4">
       <div className="flex flex-col flex-1 items-center justify-start gap-2 ">
         {models.map((model) => (
-          <div key={model} className={`w-full h-[44px] flex items-center group/gameType hover:bg-black rounded-[50px] border-[1px] border-black border-opacity-20 px-7  gap-4  cursor-pointer ${model == selectedType && 'bg-black'} `} onClick={()=>setSelectedType(model)} >
+          <div className={`w-full h-[44px] flex items-center group/gameType hover:bg-black rounded-[50px] border-[1px] border-black border-opacity-20 px-7  gap-4  cursor-pointer ${model == selectedType && 'bg-black'} `} onClick={()=>setSelectedType(model)} >
             <div className="w-[20px] h-[20px] bg-[#D9D9D9] rounded-[7px]"></div>
             <p className={`font-bold text-[14px] group-hover/gameType:text-white ${model == selectedType && 'text-white'}`}>{model}</p>
           </div>
@@ -44,9 +44,9 @@ const AddLevelModal = () => {
                 emtiaz: 5,
                 zaman: 30,
                 icon: "images/4gozineLevelIcon.svg",
-                extraAnswers:[...extraAnswers],
+                extraAnswers:JSON.parse(JSON.stringify(extraAnswers)),
                 fourChoice: {
-                  answers:[...defaultItems] ,
+                  answers:JSON.parse(JSON.stringify(defaultItems)) ,
                   image: null,
                   music: null,
                   video: null,
@@ -60,7 +60,7 @@ const AddLevelModal = () => {
                   question:'',
                 },
                 sequenceAndOrder:{
-                  answers: [...defaultItems].reverse(),
+                  answers: JSON.parse(JSON.stringify(defaultItems)).reverse(),
                   image:null,
                   music:null,
                   video:null,
@@ -75,7 +75,32 @@ const AddLevelModal = () => {
                 music:null,
                 video:null,
                 arrangeModel:'4 دسته 2 تایی',
-                pairingItems:fourXtwo
+                pairingItems:JSON.parse(JSON.stringify(fourXtwo))
+                },
+                descriptive:{
+                  question:'',
+                  image:null,
+                  music:null,
+                  video:null,
+                  mainAnswer:'',
+                  otherAnswers:['']
+                },
+                dragAndDrop:{
+                  image:null,
+                  music:null,
+                  video:null,
+                  question:[{id:uuidv4(),text:'',blank:null}],
+                  extraAnswers:[],
+                  caretPosition:0,
+                  currentItemPosition:0
+                },
+                dialogBox:{
+                  image:null,
+                  music:null,
+                  video:null,
+                  question:[{id:uuidv4(),text:'',dialog:null}],
+                  caretPosition:0,
+                  currentItemPosition:0
                 },
                 isSelected: false,
                 type: selectedType,

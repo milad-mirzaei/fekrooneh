@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import AnswerImage from '../../AnswerImage';
 import AnswerText from '../../AnswerText';
 import AnswerButton from '../../AnswerButton';
-import Image from 'next/image';
+import useLevels, { PairingInnerItem } from '@/hooks/useLevels';
+import useAddImageModal from '@/hooks/useAddImageModal';
 
-import AddImageModalHook from '@/hooks/useAddImageModal';
-import LevelsHook, { PairingInnerItem } from '@/hooks/useLevels';
 
 
 interface InnerCardProps{
@@ -15,11 +14,10 @@ interface InnerCardProps{
 }
 const InnerItemCard:React.FC<InnerCardProps> = ({item,parentIndex,index}) => {
 
-    const [hasText, setHasText] = useState(false);
 
-    const addImageModal= AddImageModalHook();
+    const addImageModal= useAddImageModal();
 
-    const levels = LevelsHook();
+    const levels = useLevels();
     const levelsList = levels.levels;
     const selectedLevelIndex = levels.levels.findIndex(
       (level) => level.isSelected == true
@@ -36,17 +34,21 @@ const InnerItemCard:React.FC<InnerCardProps> = ({item,parentIndex,index}) => {
 
       const handleDeletAnswerText = ()=>{
         const newLevel = currentLevel;
-        setHasText(false);
-        newLevel.pairing.pairingItems[parentIndex].innerItems[index].text='';
+        newLevel.pairing.pairingItems[parentIndex].innerItems[index].text=null;
         levelsList.splice(selectedLevelIndex, 1, newLevel);
         levels.onChangeLevel(levelsList);
       }
       const handleDeletAnswerImage = ()=>{
         const newLevel = currentLevel;
-        setHasText(false);
         newLevel.pairing.pairingItems[parentIndex].innerItems[index].image=null;
         levelsList.splice(selectedLevelIndex, 1, newLevel);
         levels.onChangeLevel(levelsList);
+      }
+      const handleAddText = ()=>{
+        const newLevel = currentLevel;
+          newLevel.pairing.pairingItems[parentIndex].innerItems[index].text='';
+          levelsList.splice(selectedLevelIndex, 1, newLevel);
+          levels.onChangeLevel(levelsList);
       }
 
   return (
@@ -56,7 +58,7 @@ const InnerItemCard:React.FC<InnerCardProps> = ({item,parentIndex,index}) => {
         onDelete={handleDeletAnswerImage}
         image={item.image["data_url"]}
         />
-      ):hasText ?(
+      ):item.text !== null ?(
         <AnswerText
         onChange={handleChangeAnswerText}
         value={item.text!}
@@ -66,7 +68,7 @@ const InnerItemCard:React.FC<InnerCardProps> = ({item,parentIndex,index}) => {
         ):null}
 
       <div className="absolute bottom-[24px] md:bottom-[17px] flex justify-center items-center gap-1 " dir="rtl">
-      {(item.image || hasText ) ? '': 
+      {(item.image || item.text !== null ) ? '': 
       <AnswerButton
       answers={pairingItems}
       icon="/images/calculator.svg"
@@ -74,15 +76,15 @@ const InnerItemCard:React.FC<InnerCardProps> = ({item,parentIndex,index}) => {
       onClick={()=>{}}
       />
         }
-        {(item.image || hasText ) ? '':
+        {(item.image || item.text !== null ) ? '':
         <AnswerButton
           answers={pairingItems}
           icon="/images/edit.svg"
           color="bg-[#0066FF]"
-          onClick={()=>setHasText(true)}
+          onClick={handleAddText}
         />
         }
-        {(item.image || hasText ) ? '': 
+        {(item.image || item.text !== null ) ? '': 
       
         <div
           className={`
@@ -93,7 +95,7 @@ const InnerItemCard:React.FC<InnerCardProps> = ({item,parentIndex,index}) => {
           style={{ boxShadow: "2px 2px black" }}
           onClick={() =>{addImageModal.onOpen('pairing',parentIndex,index)}}
         >
-          <Image
+          <img
             src="/images/image.svg"
             alt=""
             width={pairingItems.length == 5 ? 15 : pairingItems.length == 6 ? 13 :pairingItems.length == 8?13 :20}

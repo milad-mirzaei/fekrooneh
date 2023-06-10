@@ -1,16 +1,18 @@
 
 import React from "react";
-import LevelsHook from "../../hooks/useLevels";
+import useLevels from "../../hooks/useLevels";
 import useSettingsModal from "../../hooks/useSettingsModal";
-import Image from 'next/image';
+import usePreviewModal from "@/hooks/usePreviewModal";
 
 const Header = () => {
+  const previewModal =usePreviewModal();
 
   // const selectedLevel = useSelectedLevel();
-  const levels=LevelsHook();
+  const levels=useLevels();
   const levelList=levels.levels;
   const settingsModal= useSettingsModal();
   const selectedLevelIndex = levelList.findIndex((level)=>level.isSelected == true);
+  const currentLevel =levelList[selectedLevelIndex];
 
   const selectHandle = (index:number)=>{
     const newList = levelList;
@@ -27,10 +29,10 @@ const Header = () => {
           style={{ boxShadow: "3px 2px black" }}
         >
           <p className="text-[15px] font-extrabold">تم ها</p>
-          <Image src="images/brush.svg" alt="brush" width={21} />
+          <img src="images/brush.svg" alt="brush" width={21} />
         </div>
         <div className="flex justify-center items-center gap-1">
-          <Image src="images/stored.svg" alt="" />
+          <img src="images/stored.svg" alt="" />
           <p>پیش نویس بازی در پروفایل شما ذخیره شد.</p>
         </div>
       </div>
@@ -46,14 +48,14 @@ const Header = () => {
           style={{ boxShadow: "3px 2px black" }}
           onClick={settingsModal.onOpen}
         >
-          <Image src="images/settingsIcon.svg" alt="settingsIcon" />
+          <img src="images/settingsIcon.svg" alt="settingsIcon" />
         </div>
       </div>
 
      <div className="flex items-center gap-7">
      <div className="flex items-center gap-2">
-        <Image className={`${selectedLevelIndex!==levelList.length-1 && 'cursor-pointer'}`} src={`${selectedLevelIndex==levelList.length-1?"images/arrowDownBorderRoundDisable.svg":"images/arrowDownBorderRound.svg"}`}   alt="arrowdown" onClick={()=>{selectedLevelIndex!==levelList.length-1 && selectHandle(selectedLevelIndex+1)}} />
-        <Image className={`${selectedLevelIndex!==0 && 'cursor-pointer' }`} src={`${selectedLevelIndex==0?"images/arrowUpBorderRound.svg":"images/arrowUpBorderRoundEnable.svg"}`} alt="arrowup" onClick={()=>{selectedLevelIndex!==0 && selectHandle(selectedLevelIndex-1)}} />
+        <img className={`${selectedLevelIndex!==levelList.length-1 && 'cursor-pointer'}`} src={`${selectedLevelIndex==levelList.length-1?"images/arrowDownBorderRoundDisable.svg":"images/arrowDownBorderRound.svg"}`}   alt="arrowdown" onClick={()=>{selectedLevelIndex!==levelList.length-1 && selectHandle(selectedLevelIndex+1)}} />
+        <img className={`${selectedLevelIndex!==0 && 'cursor-pointer' }`} src={`${selectedLevelIndex==0?"images/arrowUpBorderRound.svg":"images/arrowUpBorderRoundEnable.svg"}`} alt="arrowup" onClick={()=>{selectedLevelIndex!==0 && selectHandle(selectedLevelIndex-1)}} />
         <p className="text-[#0c0c0c] text-[17px] font-semibold">
           جابجایی مراحل
         </p>
@@ -61,8 +63,9 @@ const Header = () => {
       <div className="w-[1px] h-[32px] bg-[#000000] opacity-25 ml-3"></div>
 
       <div
-        className="w-[222px] h-[53px] bg-buttonPurple rounded-[100px] border-[2px] border-[black] flex justify-center items-center "
+        className="w-[222px] h-[53px] bg-buttonPurple rounded-[100px] border-[2px] border-[black] flex justify-center items-center cursor-pointer"
         style={{ boxShadow: "4px 4px #6B00E2" }}
+        onClick={()=>previewModal.onOpen(currentLevel)}
       >
         <p className="text-white text-[16px] font-extrabold">
           مشاهده پیش نمایش
