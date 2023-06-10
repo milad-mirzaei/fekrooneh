@@ -3,6 +3,7 @@ import useAudioModal from '../../../hooks/useAudioModal';
 import useAddImageModal from '../../../hooks/useAddImageModal';
 import useLevels from '../../../hooks/useLevels';
 import { BsFillPlayCircleFill,BsFillPauseCircleFill } from 'react-icons/bs';
+import Image from 'next/image';
 
 
 
@@ -54,7 +55,7 @@ const TrueFalse = () => {
       >
         <div className="flex items-center justify-start gap-2">
           <div className="w-[32px] h-[32px] mr-5 rounded-full bg-[#FFB72A] border-[1px] border-black flex items-center justify-center">
-            <img src="images/rahnamaIcon.svg" alt="rahnama" />
+            <Image src="images/rahnamaIcon.svg" alt="rahnama" />
           </div>
           <p className="text-white font-bold text-[16px] md:text-[11px]">
             برای فعال شدن تمام قابلیت های بازیسازی میتونی اشتراک پریمیوم بگیری و
@@ -65,7 +66,7 @@ const TrueFalse = () => {
           <p className="text-white font-bold text-[16px] md:text-[11px]">
             خرید اشتراک پریمیوم
           </p>
-          <img src="images/arrowcircleup2.svg" alt="arrow" />
+          <Image src="images/arrowcircleup2.svg" alt="arrow" />
         </div>
       </div>
       <div className="md:h-[175px] h-[257px] flex flex-row justify-start items-end gap-5">
@@ -83,7 +84,7 @@ const TrueFalse = () => {
             className=" w-[42px] h-[42px] rounded-full border-[1px] border-black flex items-center justify-center bg-[#DFECFF]"
             style={{ boxShadow: "4px 3px black" }}
           >
-            <img src="images/editIcon.svg" alt="edit" />
+            <Image src="images/editIcon.svg" alt="edit" />
           </div>
           <textarea
             disabled={false}
@@ -132,35 +133,35 @@ const TrueFalse = () => {
                   className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#FFB72A] border-dashed border-[#ffffff] border-[2px] rounded-[15px]"
                   onClick={() => addImageModal.onOpen("levelImage",null,null)}
                 >
-                  <img src="images/image.svg" alt="image" />
+                  <Image src="images/image.svg" alt="image" />
                   {/* <div className="absolute w-[20px] h-[20px] flex items-center justify-center bg-white rounded-full border-[2px] -right-[10px] border-black">
-                  <img src="images/+.svg" alt="plus" />
+                  <Image src="images/+.svg" alt="plus" />
                 </div> */}
                 </div>
                 <div
                   className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#F6EDFF] border-dashed border-[#6B00E2] border-[2px] rounded-[15px]"
                   onClick={audioModal.onOpen}
                 >
-                  <img src="images/voicecircle.svg" alt="voice" />
+                  <Image src="images/voicecircle.svg" alt="voice" />
                   <div
                     className="absolute w-[23px] h-[23px] flex items-center justify-center bg-[#FFB72A] rounded-full border-[1px] -top-[17px] border-black"
                     style={{ boxShadow: "1px 1px black" }}
                   >
-                    <img src="images/rahnamaIcon2.svg" alt="plus" />
+                    <Image src="images/rahnamaIcon2.svg" alt="plus" />
                   </div>
                 </div>
                 <div className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#DDFFED] border-dashed border-[#28DE7C] border-[2px] rounded-[15px]">
-                  <img src="images/videocircle.svg" alt="video" />
+                  <Image src="images/videocircle.svg" alt="video" />
                   <div
                     className="absolute w-[23px] h-[23px] flex items-center justify-center bg-[#FFB72A] rounded-full border-[1px] -top-[17px] border-black"
                     style={{ boxShadow: "1px 1px black" }}
                   >
-                    <img src="images/rahnamaIcon2.svg" alt="plus" />
+                    <Image src="images/rahnamaIcon2.svg" alt="plus" />
                   </div>
                 </div>
               </div>
               <div className="flex items-center justify-center gap-1">
-                <img src="images/info.svg" alt="info" />
+                <Image src="images/info.svg" alt="info" />
                 <p className="text-[13px] font-semibold text-black opacity-50">
                   میتونی یک تصویر , صدا یا ویدیو اضافه کنی
                 </p>
@@ -170,7 +171,7 @@ const TrueFalse = () => {
             currentLevel.trueFalse.video == null ? (
             <div className="md:h-[175px] md:w-[175px] flex justify-center items-center group/levelImage  relative">
               
-              <img
+              <Image
                 className="h-full"
                 src={currentLevel.trueFalse.image["data_url"]}
                 alt=""
@@ -210,7 +211,7 @@ const TrueFalse = () => {
      <div className='flex flex-row justify-center items-center gap-4'>
       <div className='w-[400px] h-[161px] border-[1px] border-black bg-[#B2FFD6] rounded-[13px] flex flex-row justify-between items-center cursor-pointer  hover:scale-105 transition-all duration-500' style={{ boxShadow: "4px 3px black" }} onClick={()=>handleSelectAnswer('درست')} > 
             <div className='flex justify-between items-center gap-7'>
-              <img src="/images/GozineMask3.svg" alt="" />
+              <Image src="/images/GozineMask3.svg" alt="" />
               <p className='text-[30px] text-[#002612] font-bold'>درست</p>
             </div>
             {currentLevel.trueFalse.answer == 'درست' ?<div className='w-[50px] h-[50px] ml-5 rounded-full bg-white flex justify-center items-center'style={{ boxShadow: "3px 3px black" }}>
@@ -219,7 +220,7 @@ const TrueFalse = () => {
       </div>
       <div className='w-[400px] h-[161px] border-[1px] border-black bg-[#FFDDD1] rounded-[13px] flex flex-row justify-between items-center cursor-pointer  hover:scale-105 transition-all duration-500' style={{ boxShadow: "4px 3px black" }} onClick={()=>handleSelectAnswer('غلط')} >
             <div className='flex justify-between items-center gap-7 pr-4'>
-              <img src="/images/GozineMask4.svg" alt="" />
+              <Image src="/images/GozineMask4.svg" alt="" />
               <p className='text-[30px] text-[#770E00] font-bold'>نادرست</p>
             </div>
             {currentLevel.trueFalse.answer == 'غلط' ?<div className='w-[50px] h-[50px] ml-5 rounded-full bg-white flex justify-center items-center'style={{ boxShadow: "3px 3px black" }}>

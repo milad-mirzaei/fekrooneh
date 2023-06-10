@@ -3,6 +3,7 @@ import React from "react";
 import useLevels from "../../hooks/useLevels";
 import useSettingsModal from "../../hooks/useSettingsModal";
 import usePreviewModal from "@/hooks/usePreviewModal";
+import Image from "next/image";
 
 const Header = () => {
   const previewModal =usePreviewModal();
@@ -29,10 +30,10 @@ const Header = () => {
           style={{ boxShadow: "3px 2px black" }}
         >
           <p className="text-[15px] font-extrabold">تم ها</p>
-          <img src="images/brush.svg" alt="brush" width={21} />
+          <Image src="images/brush.svg" alt="brush" width={21} />
         </div>
         <div className="flex justify-center items-center gap-1">
-          <img src="images/stored.svg" alt="" />
+          <Image src="images/stored.svg" alt="" />
           <p>پیش نویس بازی در پروفایل شما ذخیره شد.</p>
         </div>
       </div>
@@ -48,14 +49,14 @@ const Header = () => {
           style={{ boxShadow: "3px 2px black" }}
           onClick={settingsModal.onOpen}
         >
-          <img src="images/settingsIcon.svg" alt="settingsIcon" />
+          <Image src="images/settingsIcon.svg" alt="settingsIcon" />
         </div>
       </div>
 
      <div className="flex items-center gap-7">
      <div className="flex items-center gap-2">
-        <img className={`${selectedLevelIndex!==levelList.length-1 && 'cursor-pointer'}`} src={`${selectedLevelIndex==levelList.length-1?"images/arrowDownBorderRoundDisable.svg":"images/arrowDownBorderRound.svg"}`}   alt="arrowdown" onClick={()=>{selectedLevelIndex!==levelList.length-1 && selectHandle(selectedLevelIndex+1)}} />
-        <img className={`${selectedLevelIndex!==0 && 'cursor-pointer' }`} src={`${selectedLevelIndex==0?"images/arrowUpBorderRound.svg":"images/arrowUpBorderRoundEnable.svg"}`} alt="arrowup" onClick={()=>{selectedLevelIndex!==0 && selectHandle(selectedLevelIndex-1)}} />
+        <Image className={`${selectedLevelIndex!==levelList.length-1 && 'cursor-pointer'}`} src={`${selectedLevelIndex==levelList.length-1?"images/arrowDownBorderRoundDisable.svg":"images/arrowDownBorderRound.svg"}`}   alt="arrowdown" onClick={()=>{selectedLevelIndex!==levelList.length-1 && selectHandle(selectedLevelIndex+1)}} />
+        <Image className={`${selectedLevelIndex!==0 && 'cursor-pointer' }`} src={`${selectedLevelIndex==0?"images/arrowUpBorderRound.svg":"images/arrowUpBorderRoundEnable.svg"}`} alt="arrowup" onClick={()=>{selectedLevelIndex!==0 && selectHandle(selectedLevelIndex-1)}} />
         <p className="text-[#0c0c0c] text-[17px] font-semibold">
           جابجایی مراحل
         </p>

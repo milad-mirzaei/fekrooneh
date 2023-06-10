@@ -1,5 +1,6 @@
 import React from "react";
 import useLevels, { Level } from "../hooks/useLevels";
+import Image from "next/image";
 
 interface LevelCardProps {
   index: number;
@@ -71,14 +72,14 @@ const LevelCard: React.FC<LevelCardProps> = ({ index, level }) => {
           </p>
         </div>
         <div className="flex gap-2 justify-end  mr-0 mt-1">
-          <img
+          <Image
             onClick={(event) =>{event.stopPropagation(); handleCopy(level)}}
             src={`${
               level.isSelected ? "images/copyWhite.svg" : "images/copy.svg"
             }`}
             alt="copy"
           />
-          <img
+          <Image
             onClick={(event) =>{event.stopPropagation(); handleDelete(level)}}
             src={`${
               level.isSelected
@@ -90,14 +91,14 @@ const LevelCard: React.FC<LevelCardProps> = ({ index, level }) => {
         </div>
       </div>
       <div className="absolute bottom-0 w-[202px] h-[117px] bg-[#F5F5F5] bg-levelCard border-[1px] border-black rounded-[20px] flex justify-center items-center">
-        <img src={level.icon} alt="4gozine" />
+        <Image src={level.icon} alt="4gozine" />
       </div>
       {level.rahnamaColor && level.rahnamaIcon && (
         <div
           className="absolute -right-5 bottom-14 flex items-center justify-center w-[34px] h-[34px] rounded-full bg-[#f03944] border-[2px] border-black"
           style={{ boxShadow: "3px 2px black" }}
         >
-          <img src="images/infocircle.svg" alt="info" />
+          <Image src="images/infocircle.svg" alt="info" />
         </div>
       )}
     </div>

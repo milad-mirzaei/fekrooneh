@@ -1,6 +1,7 @@
 import React from 'react'
 import PairingCard from './PairingCard'
 import useLevels from '@/hooks/useLevels';
+import Image from 'next/image';
 
 
 const Pairing = () => {
@@ -28,7 +29,7 @@ const Pairing = () => {
     >
       <div className="flex items-center justify-start gap-2">
         <div className="w-[32px] h-[32px] mr-5 rounded-full bg-[#FFB72A] border-[1px] border-black flex items-center justify-center">
-          <img src="images/rahnamaIcon.svg" alt="rahnama" />
+          <Image src="images/rahnamaIcon.svg" alt="rahnama" />
         </div>
         <p className="text-white font-bold text-[16px] md:text-[11px]">
           برای فعال شدن تمام قابلیت های بازیسازی میتونی اشتراک پریمیوم بگیری و
@@ -39,7 +40,7 @@ const Pairing = () => {
         <p className="text-white font-bold text-[16px] md:text-[11px]">
           خرید اشتراک پریمیوم
         </p>
-        <img src="images/arrowcircleup2.svg" alt="arrow" />
+        <Image src="images/arrowcircleup2.svg" alt="arrow" />
       </div>
     </div>
     <div className="md:h-[122px] h-[157px] px-[20px] w-full flex flex-row justify-start items-end gap-5">
@@ -57,7 +58,7 @@ const Pairing = () => {
           className=" w-[42px] h-[42px] rounded-full border-[1px] border-black flex items-center justify-center bg-[#DFECFF]"
           style={{ boxShadow: "4px 3px black" }}
         >
-          <img src="images/editIcon.svg" alt="edit" />
+          <Image src="images/editIcon.svg" alt="edit" />
         </div>
         <textarea
           disabled={false}
@@ -98,7 +99,7 @@ const Pairing = () => {
       {pairingItems.map((item,index)=>(
         <PairingCard
         item={item}
-        
+        key={index}
         index={index}
         />
       ))}

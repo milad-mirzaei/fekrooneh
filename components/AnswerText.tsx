@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react'
 
 
@@ -51,7 +52,7 @@ const AnswerText:React.FC<AnswerTextProps> = ({onChange,value,placeholder,onDele
           </div>
             <div className="absolute -top-6 right-[50] px-[10px] h-[30px] flex justify-center gap-1 items-center border-[1px] border-black bg-neutral-600 hover:bg-red-600 transition-all duration-300 rounded-full cursor-pointer" onClick={onDelete}>
               <p className='text-white text-[16px]'>حذف متن</p>
-              <img src="/images/closecircle2.svg" alt="" width={20} height={20} />
+              <Image src="/images/closecircle2.svg" alt="" width={20} height={20} />
             </div>
         </div>
   )

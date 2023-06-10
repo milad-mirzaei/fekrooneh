@@ -101,9 +101,9 @@ const GozineCard: React.FC<GozineCardProps> = ({ index, gozine }) => {
      }  border-[3px] border-black `}
       style={{ boxShadow: "4px 3px black" }}
     >
-      <img
+      <Image
         className="absolute top-[50px] right-[5px]"
-        src={gozine.mask}
+        src={gozine.mask!}
         alt="mask"
       />
       <div

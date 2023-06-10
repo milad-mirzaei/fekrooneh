@@ -8,6 +8,7 @@ import {
   threeXtwo,
   twoXtow,
 } from "../constants/defaultPairingItems";
+import Image from "next/image";
 
 interface RightSideBarSelectProps {
   titleIcon: string;
@@ -117,7 +118,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
       className="flex flex-col justify-start items-start w-full gap-2  transition-all duration-300 "
     >
       <div className="flex justify-start items-center gap-2 pr-5 transition-all duration-300">
-        <img src={titleIcon} alt="gamepad" />
+        <Image src={titleIcon} alt="gamepad" />
         <p className="text-[13px] font-semibold">{title}</p>
       </div>
       <div
@@ -132,7 +133,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
               {selectedIcon && (
                 <div className="relative w-[52px] h-[34px] ">
                   <div className="absolute w-[34px] h-[34px] rounded-full mr-4  bg-[#eaeefb]"></div>
-                  <img
+                  <Image
                     className="absolute -left-2"
                     src={selectedIcon}
                     alt="4gozine"
@@ -154,7 +155,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
               </p>
             </div>
             <div className=" w-[30px] h-[22px] ml-4 mt-1 rounded-[14px] bg-[#ffffff] border-black border-[1px] flex items-center justify-center">
-              <img
+              <Image
                 className={`${
                   isOpen && "rotate-180"
                 } transition-all duration-300`}
@@ -169,6 +170,7 @@ const RightSideBarSelect: React.FC<RightSideBarSelectProps> = ({
               choices.map((item, index) => {
                 return (
                   <div
+                  key={index}
                     className={` w-full md:h-[45px] py-3 rounded-[30px] border-[1px] border-black px-4  flex items-center justify-start hover:bg-black hover:text-white transition-all duration-300 
                     ${parseInt(item) == currentLevel.zaman &&"bg-neutral-500 text-white"}
                     ${parseInt(item) == currentLevel.emtiaz &&"bg-neutral-500 text-white"}

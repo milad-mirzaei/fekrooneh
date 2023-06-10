@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 
 import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
 import useGameMusics from "../hooks/useGameMusics";
+import Image from "next/image";
 
 interface GameBgAudioCardPops {
   music: string;
@@ -50,7 +51,7 @@ const GameBgAudioCard: React.FC<GameBgAudioCardPops> = ({
       onClick={() => selectHandle(index)}
     >
       <div className="w-[120px] h-[120px] px-[2px]">
-        <img className="rounded-t-[20px]" src={image} alt="image" />
+        <Image className="rounded-t-[20px]" src={image} alt="image" />
       </div>
       <p className="font-bold text-[17px]">{name}</p>
       <div

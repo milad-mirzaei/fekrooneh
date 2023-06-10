@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RightSideBarSelect from "../RightSideBarSelect";
 import useLevels, { Level } from "../../hooks/useLevels";
+import Image from "next/image";
 
 
 const RigtSideBar = () => {
@@ -119,7 +120,7 @@ const RigtSideBar = () => {
       /> }
       {currentLevel.type === 'جفت سازی' ? null : <div>
       <div className="flex w-full items-center justify-start pr-5 gap-2">
-        <img src="images/magic-wand.svg" alt="magic" />
+        <Image src="images/magic-wand.svg" alt="magic" />
         <p className="font-bold">افکت تصویر</p>
       </div>
       <div className="grid grid-cols-2 gap-2">
@@ -134,7 +135,7 @@ const RigtSideBar = () => {
       </div>
       <div className=" md:w-[225px] md:h-[45px] w-[289px] max-w-[289px] hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-3  h-[53px] rounded-full border-[1px] border-black bg-[#ffb72a] top-2 " style={{ boxShadow: "2px 3px black" }}>
             <div className="w-[33px] h-[33px] flex items-center justify-center rounded-full border-black border-[1px]" style={{ boxShadow: "2px 2px black" }}>
-                <img src="images/rahnamaIcon.svg" alt="rahnama" width={18} />
+                <Image src="images/rahnamaIcon.svg" alt="rahnama" width={18} />
             </div>
                 <p className="text-white text-[14px] font-bold">افزودن راهنما به این مرحله</p>
       </div>

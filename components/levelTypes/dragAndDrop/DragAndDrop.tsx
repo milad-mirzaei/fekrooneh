@@ -6,6 +6,7 @@ import QuestionEditable from "./QuestionEditable";
 import useAudioModal from "@/hooks/useAudioModal";
 import useAddImageModal from "@/hooks/useAddImageModal";
 import useLevels from "@/hooks/useLevels";
+import Image from "next/image";
 
 const DragAndDrop = () => {
   const audioModal = useAudioModal();
@@ -94,7 +95,7 @@ const DragAndDrop = () => {
       >
         <div className="flex items-center justify-start gap-2">
           <div className="w-[32px] h-[32px] mr-5 rounded-full bg-[#FFB72A] border-[1px] border-black flex items-center justify-center">
-            <img src="images/rahnamaIcon.svg" alt="rahnama" />
+            <Image src="images/rahnamaIcon.svg" alt="rahnama" />
           </div>
           <p className="text-white font-bold text-[16px] md:text-[11px]">
             برای فعال شدن تمام قابلیت های بازیسازی میتونی اشتراک پریمیوم بگیری و
@@ -105,7 +106,7 @@ const DragAndDrop = () => {
           <p className="text-white font-bold text-[16px] md:text-[11px]">
             خرید اشتراک پریمیوم
           </p>
-          <img src="images/arrowcircleup2.svg" alt="arrow" />
+          <Image src="images/arrowcircleup2.svg" alt="arrow" />
         </div>
       </div>
       <div className="md:h-[260px] h-[257px]  flex flex-row justify-start items-end gap-5">
@@ -133,12 +134,12 @@ const DragAndDrop = () => {
             className=" w-[42px] h-[42px] rounded-full border-[1px] border-black flex items-center justify-center bg-[#DFECFF]"
             style={{ boxShadow: "4px 3px black" }}
           >
-            <img src="images/editIcon.svg" alt="edit" />
+            <Image src="images/editIcon.svg" alt="edit" />
           </div>
           <div className="flex items-center gap-[2px] pr-[12px] mt-[20px] flex-wrap w-full">
-            {question.map((item,index)=>item.text !== null ?<QuestionEditable index={index} />
+            {question.map((item,index)=>item.text !== null ?<QuestionEditable index={index} key={index}/>
              :
-             <div className="relative flex justify-center items-center">
+             <div key={index} className="relative flex justify-center items-center">
               <div
                     dir="rtl"
                     className="min-w-[50px] border-[2px] border-dashed border-black rounded-[13px] p-[7px] px-[17px] flex items-center justify-center"
@@ -176,35 +177,35 @@ const DragAndDrop = () => {
                   className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#FFB72A] border-dashed border-[#ffffff] border-[2px] rounded-[15px]"
                   onClick={() => addImageModal.onOpen("levelImage", null, null)}
                 >
-                  <img src="images/image.svg" alt="image" />
+                  <Image src="images/image.svg" alt="image" />
                   {/* <div className="absolute w-[20px] h-[20px] flex items-center justify-center bg-white rounded-full border-[2px] -right-[10px] border-black">
-              <img src="images/+.svg" alt="plus" />
+              <Image src="images/+.svg" alt="plus" />
             </div> */}
                 </div>
                 <div
                   className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#F6EDFF] border-dashed border-[#6B00E2] border-[2px] rounded-[15px]"
                   onClick={audioModal.onOpen}
                 >
-                  <img src="images/voicecircle.svg" alt="voice" />
+                  <Image src="images/voicecircle.svg" alt="voice" />
                   <div
                     className="absolute w-[23px] h-[23px] flex items-center justify-center bg-[#FFB72A] rounded-full border-[1px] -top-[17px] border-black"
                     style={{ boxShadow: "1px 1px black" }}
                   >
-                    <img src="images/rahnamaIcon2.svg" alt="plus" />
+                    <Image src="images/rahnamaIcon2.svg" alt="plus" />
                   </div>
                 </div>
                 <div className="cursor-pointer relative w-[55px] h-[50px] flex items-center justify-center bg-[#DDFFED] border-dashed border-[#28DE7C] border-[2px] rounded-[15px]">
-                  <img src="images/videocircle.svg" alt="video" />
+                  <Image src="images/videocircle.svg" alt="video" />
                   <div
                     className="absolute w-[23px] h-[23px] flex items-center justify-center bg-[#FFB72A] rounded-full border-[1px] -top-[17px] border-black"
                     style={{ boxShadow: "1px 1px black" }}
                   >
-                    <img src="images/rahnamaIcon2.svg" alt="plus" />
+                    <Image src="images/rahnamaIcon2.svg" alt="plus" />
                   </div>
                 </div>
               </div>
               <div className="flex items-center justify-center gap-1">
-                <img src="images/info.svg" alt="info" />
+                <Image src="images/info.svg" alt="info" />
                 <p className="text-[13px] font-semibold text-black opacity-50">
                   میتونی یک تصویر , صدا یا ویدیو اضافه کنی
                 </p>
@@ -212,7 +213,7 @@ const DragAndDrop = () => {
             </div>
           ) : music == null && video == null ? (
             <div className="md:h-[175px] md:w-[175px] flex justify-center items-center group/levelImage  relative">
-              <img className="h-full" src={image["data_url"]} alt="" />
+              <Image className="h-full" src={image["data_url"]} alt="" />
               <div className="absolute w-[300px] h-[175px] rounded-[20px] bg-neutral-300 bg-opacity-40  hidden group-hover/levelImage:flex items-center  gap-2 justify-center transition-all duration-500">
                 <button
                   className="  rounded-[15px] px-5 py-2 bg-white border-[3px] border-white group/remove border-dashed hover:border-purple-500 transition-all duration-500"
@@ -236,6 +237,7 @@ const DragAndDrop = () => {
           if (item.blank !== null && item.blank !== '') {
             return (
               <div
+              key={index}
                 className="bg-[#28DE7C] border-[1px] border-black rounded-[12px] px-[10px] h-[50px] cursor-pointer hover:-translate-y-[7px] transition-all duration-300 flex justify-center items-center text-[17px] font-extrabold"
                 style={{ boxShadow: "2px 2px black" }}
               >
